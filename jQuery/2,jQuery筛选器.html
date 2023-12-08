@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <div class="container-list">
+        <!-- <span>暂无数据</span> -->
+        <!-- forbidden 样式 应用于 待审核 和 已使用的 优惠卷 -->
+        <div class="credit forbidden">
+            <a href="javascript:void(0)" data-id="1">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <!-- yes 主要应用于 待审核， no 应用于 已使用, 已审核无该样式 -->
+                        <dd class="yes">待审核</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit forbidden">
+            <a href="javascript:void(0)" data-id="2">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd class="no">2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="3">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="4">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="5">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="6">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="7">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="1">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="2">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="3">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="4">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="5">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="6">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+
+        <div class="credit">
+            <a href="javascript:void(0)" data-id="7">
+                <div class="left">
+                    <dl>
+                        <dt>咖啡卷</dt>
+                        <dd>2023/11/24 ~ 2023/12/01</dd>
+                    </dl>
+                </div>
+                <div class="right"></div>
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <a href="./applyCoffee.html" class="apply">申请咖啡卷</a>
+        <a href="./orderCoffee.html" class="juan active">我的咖啡卷</a>
+    </footer>
+
+    <aside class="backtop"></aside>
+
+
+
+    <script>
+        /**
+         * 筛选器的作用：对选择器选择的结果进行过滤
+         *      下面这些选择器很多不止可以传入选择器，还可以传入DOM对象或者jQuery对象
+         *      1，filter(css)：过滤出与指定表达式匹配的元素集合、
+         *      2，has(css)：过滤出与指定选择器选中的元素
+         *      3，is(css)：判断当前元素是否与指定选择器选中的元素匹配，如果选择器中选中的元素有匹配css规则的元素，则返回true，否则返回false
+         *      4，not(css)：过滤出与指定表达式不匹配的元素集合，
+         *      5，first()：过滤出第一个元素
+         *      6，last()：过滤出最后一个元素    
+         *      7，eq(index)：过滤出指定索引的元素
+         *      8，not(css)：过滤出与指定表达式不匹配的元素集合
+         *      9，slice(start, end)：过滤出从start开始到end结束的元素集合
+         *      10，children([css])：过滤出当前元素的所有子元素，且支持传入css过滤
+         *      11，find(css)：过滤出当前元素的所有后代元素，css是必传参数
+         *      12，parent([css])：获取直接父元素，支持传入选择器用来过滤
+         *      13，parents([css])：获取所有祖先元素，支持传入选择器用来过滤
+         *      14，parentsUntil([css])：获取所有祖先元素，直到遇到css选择器选中的元素为止，且不包含css选择器选中的元素
+         *      15，next([css])：获取下一个兄弟元素，支持传入选择器用来过滤
+         *      16，prev([css])：获取上一个兄弟元素，支持传入选择器用来过滤
+         *      17，prevAll([css])：获取所有前面的兄弟元素，支持传入选择器用来过滤
+         *      18，prevUntil([css])：获取所有前面的兄弟元素，直到遇到css选择器选中的元素为止，且不包含css选择器选中的元素
+         *      19，nextAll([css])：获取所有后面的兄弟元素，支持传入选择器用来过滤
+         *      20，nextUntil([css])：获取所有后面的兄弟元素，直到遇到css选择器选中的元素为止，且不包含css选择器选中的元素
+         *      21，siblings([css])：获取所有兄弟元素，支持传入选择器用来过滤
+         * 
+         *      
+         *      
+        */
+        // 获取class="credit"的div元素
+        let tags = $("div.credit");
+
+        // 获取div样式中包含forbidden的元素
+        console.log(tags.filter(".forbidden"));
+
+        // 获取div元素下包含dd.yes的所有div元素
+        console.log(tag.has("dd.yes"));
+
+        // 判断当前元素是否与指定选择器选中的元素匹配
+        console.log(tag.is(".forbidden"));
+
+    </script>
+</body>
+</html>

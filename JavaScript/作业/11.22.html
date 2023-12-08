@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function reverseTwoWords(a, b) {
+            [a, b] = [b, a];
+            return [a, b];
+        }
+        console.log(reverseTwoWords(10, 20));
+    </script>
+
+    <script>
+        var array = [1, [2, 3], [4, [5, 6]]];
+        var [a, [b], [, [, c]]] = array;
+        console.log(a, b, c);
+    </script>
+
+    <script>
+        var array = [{ id: 1, data: { name: 'John' } }, { id: 2, data: { name: 'Doe' } }]
+        var [{ data: { name: name1 } }, { data: { name: name2 } }] = array;
+        console.log(name1, name2);
+    </script>
+
+    <script>
+        function jointUrl({ url, searchParams = {}, hash = "" } = {}) {
+            // 接受url域名
+            let urlResult = url;
+
+
+            // 判断域名是否为空
+            if (url == null) {
+                urlResult = ""
+            }
+
+            // 使用临时列表判断searchParams是否为空
+            let tempArr = Object.keys(searchParams);
+            console.log(tempArr);
+
+            // 处理 searchParams，
+            if (tempArr.length > 0) {
+                let searchParamsStr = Object.keys(searchParams).map(key => `${key}=${searchParams[key]}`).join("&");
+                urlResult += `?${searchParamsStr}`;
+            }
+
+            // 处理 hash
+            if (hash.length > 0) {
+                urlResult += hash;
+            }
+            return urlResult;
+        }
+
+
+        var result = jointUrl({
+            url: "http://www.taobao.com/goods",
+            searchParams: { page: 20, num: 33 },
+            hash: "#s"
+        });
+        console.log(result);
+    </script>
+
+    <script>
+        let Data = {
+            meta: { name: "姓名", sex: "性别", score: "成绩" },
+            data: [
+                ["张三", "男", 85],
+                ["李四", "男", 77],
+                ["王五", "女", 79],
+            ],
+        };
+
+        let newData = Data.data.map(([name, sex, score]) => ({
+            "姓名": name,
+            "性别": sex,
+            "成绩": score,
+        }));
+
+        console.log(newData);
+    </script>
+</body>
+
+</html>

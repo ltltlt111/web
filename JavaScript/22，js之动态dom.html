@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>hahahhahahahahahah</div>
+
+    <p class="x" >dawdadadawd</p>
+
+    <p>yyyyyyy</p>
+    <script>
+        // 创建一个div标签，此时不会出现在网页dom中
+        let divTag = document.createElement("div")
+
+
+        divTag.innerText="123";
+        divTag.id = "a";
+        divTag.className="xxx";
+
+        // 将div标签添加到body中，append在指定标签尾部追加子节点
+        // document.body.append(divTag)
+        // document.body.appendChild(divTag)
+
+        // // 在指定标签头部添加子节点
+        // document.body.prepend(divTag)
+
+        // 在指定标签的前面添加兄弟节点
+        // document.body.before(divTag)
+        // 在指定标签的后面添加兄弟节点
+
+        // document.body.after(divTag)
+        // 在指定标签的子标签前node节点
+        document.body.insertBefore(divTag, document.querySelector(".x"))
+        console.log(divTag);
+
+        // remove：删除自己
+        // removeChile(node)：删除指定标签内的指定子标签
+    </script>
+</body>
+</html>

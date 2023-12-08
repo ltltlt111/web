@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {margin: 0; padding: 0;}
+			a {text-decoration: none; cursor: pointer; color: #777;}
+			textarea, input, select {outline: none;}
+			ul {list-style: none;}
+			header {
+				height: 80px;
+				line-height: 80px;
+				background-color: #FF5722;
+				color: #fff;
+				min-width: 1260px;
+				font-size: 30px;
+				text-align: center;
+			}
+			
+			.nav, .container {
+				width: 1260px;
+				margin: 0 auto;
+			}
+			
+			.container .title {
+				width: 780px;
+				height: 100px;
+				line-height: 100px;
+				margin: 0 auto;
+			}
+			
+			.container .btn {
+				border-radius: 5px;
+				background-color: #009688;
+				color: #fff;
+				height: 35px;
+				padding: 10px 20px;
+			}
+			
+			.container .task {
+				height: 40px;
+				width: 600px;
+				vertical-align: middle;
+				box-sizing: border-box;
+				margin-top: -3px;
+				border-radius: 5px;
+				border: 1px solid #5FB878;
+				padding: 0 10px;
+			}
+			
+			.container .item li {
+				flex: auto 1 1;
+				text-align: center;
+				border-bottom: 1px solid #eee;
+			}
+			
+			.container .task-list {
+				text-align: center;
+			}
+			
+			.container .item {
+				display: flex;
+				width: 780px;
+				flex-flow: row nowrap; 
+				height: 40px;
+				line-height: 40px;
+				justify-content: flex-start;
+				align-items: stretch;
+				margin: 0 auto;
+				font-size: 14px;
+			}
+			
+			.container .item .ck {
+				width: 50px;
+			}
+			
+			.container .item .id  {
+				width: 80px;
+			}
+			
+			.container .item .name  {
+				width: 300px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+			
+			.container .item .name input {
+				width: 280px;
+				height: 28px;
+				border-radius: 5px;
+				border: 1px solid #5FB878;
+				padding: 0 8px;
+			}
+			
+			.container .task-status {
+				width: 780px;
+				text-align: center;
+				margin: 10px auto 20px;
+			}
+			
+			.container .task-status b {
+				color: #f00;
+			}
+			
+			.container .item .status  {
+				width: 80px;
+			}
+			
+			.container .item .time  {
+				width: 180px;
+			}
+			
+			.container .item .name.over {
+				text-decoration: line-through;
+			}
+			
+			.container .small-btn-error {
+				padding: 5px 8px;
+				background-color: #FF5722;
+				font-size: 12px;
+				color: #fff;
+			}
+			
+			.container .small-btn-error:hover {
+				background-color: #FFB800 ;
+			}
+			
+			.container [type=checkbox] {
+				width: 16px;
+				height: 16px;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!-- 
+		要求实现的效果如下：
+			页面中的数据均为 假数据、 实现效果后 将假数据删除 ！！！
+			
+			1)  输入框中输入 任务信息 、点击 添加任务 按钮 或者 按下 回车键 实现任务添加， 添加后的任务效果 参考 假数据 1
+				添加成功后、清除 输入的任务信息 
+				
+			2)  点击 某个任务前面的复选框、完成任务, 实现效果 参考假数据 2 (勾选复选框 并禁用 复选框)
+			
+			3)  双击 未完成的任务名 、显示 输入框、 实现效果 参考 假数据 3 
+			
+				3.1)  在显示的输入框中 ，输入 修改后的 内容， 按 回车键 保存数据、并返回  效果参考 假数据1
+				3.2)  在显示的输入框中， 按下 ESC 取消数据 修改、并返回 效果参考 假数据 1
+			
+			4)  点击 删除 、进行简单友好提示、删除 该条数据！！！	
+		 -->
+		
+		<header>
+			<div class="nav">任务列表清单</div>
+		</header>
+		
+		<div class="container">
+			
+			<div class="title">
+				<input class="task" type="text" placeholder="请输入任务名,例如吃饭,睡觉,打豆豆">
+				<a class="btn" href="javascript:void(0)">添加任务</a>
+			</div>
+			
+			<div class="task-status">
+				<span>总任务数(<b>0</b>)</span>
+				<span>已完成任务(<b>0</b>)</span>
+				<span>未完成任务(<b>0</b>)</span>
+			</div>
+			
+			
+			<div class="task-list">
+				<ul class="item">
+					<li class="ck">#</li>
+					<li class="id">任务编号</li>
+					<li class="name">任务名</li>
+					<li class="status">任务状态</li>
+					<li class="time">添加时间</li>
+					<li>操作</li>
+				</ul>
+				
+				<!--
+				<ul class="item data">
+					<li class="ck"><input type="checkbox"/></li>
+					<li class="id">1</li>
+					<li class="name">吃晚饭</li>
+					<li class="status">未完成</li>
+					<li class="time">2023/11/28</li>
+					<li>
+						<a class="small-btn-error" href="javascript:void(0)">删除</a>
+					</li>
+				</ul>
+				
+				<ul class="item data">
+					<li class="ck"><input type="checkbox" checked disabled/></li>
+					<li class="id">2</li>
+					<li class="name over">打豆豆</li>
+					<li class="status">完成</li>
+					<li class="time">2023/11/28</li>
+					<li>
+						<a class="small-btn-error" href="javascript:void(0)">删除</a>
+					</li>
+				</ul>
+				
+				<ul class="item data">
+					<li class="ck"><input type="checkbox"/></li>
+					<li class="id">3</li>
+					<li class="name"><input type="text" value="睡觉"></li>
+					<li class="status">未完成</li>
+					<li class="time">2023/11/28</li>
+					<li>
+						<a class="small-btn-error" href="javascript:void(0)">删除</a>
+					</li>
+				</ul>
+				-->
+			</div>
+		</div>
+		
+		<script src="./js/strings.js"></script>
+		
+		<!-- 
+			 JSON 序列化 和 反序列化 
+			 
+				序列化: JSON.stringify(obj) : 将一个 JS 对象/数组 转成  JSON格式的字符串 
+				
+				反序列化: JSON.parse(jsonstring) : 将一个 JSON格式的字符串转成  JS对象/数组。
+		 -->
+		<script>
+			(function() {
+				
+				let taskList = JSON.parse(localStorage.getItem("TASK-LIST") ?? "[]"); // 存储所有的任务
+				let identifiy = parseInt(localStorage.getItem("TASK-IDENTIFIY") ?? "0"); ;  // 用来记录 数据的唯一编号
+				let editIndex = -1 ; // 编辑的行
+				// 添加任务
+				function addTask(tag) {
+					// 获取输入的任务名 
+					let taskName = tag.value.trim() ; 
+					// 如果 任务名为空， 则 不做任何事情
+					if (taskName === "") {
+						alert("任务名不能为空") ;
+						return ;
+					}
+					
+					// 查询任务名是否已经存在 
+					if (taskList.find(task => task.name === taskName)) {
+						alert("任务名已经存在");
+						return ;
+					}
+					
+					// 添加一个任务 
+					taskList.unshift({
+						id: ++identifiy ,
+						name: taskName,  
+						status: false ,
+						createTime: new Date().format('%Y/%m/%d %H:%M:%S')
+					});
+					// 删除输入的任务名 
+					tag.value = "" ;
+					localStorage.setItem("TASK-IDENTIFIY", identifiy);
+					showData();
+				}
+				
+				function showData() {
+					let tastListTag = document.querySelector(".task-list") ;
+					
+					let ulHtml = tastListTag.children[0].outerHTML ; 
+					
+					// 尝试从 localStorage 中 获取 任务列表 
+					// 对 JSON 的反序列 操作 
+					
+					// 遍历数据、动态追加 ul 标签 到 task-list 中 
+					taskList.forEach((task, index) => {
+						ulHtml += `
+							<ul class="item data">
+								<li class="ck"><input type="checkbox" value="${task.id}" ${task.status ? 'checked disabled' : ''} /></li>
+								<li class="id">${index + 1}</li>
+							`
+						if (editIndex == index) {
+							ulHtml += `<li class="name" data-id="${task.id}"><input type="text" value="${task.name}"/></li>`
+						}else{
+							ulHtml += `<li class="name ${task.status ? 'over': ''}" data-index="${index}">${task.name}</li>` ;
+						}
+						
+						ulHtml += `	
+								<li class="status">${task.status ? '完成' : '未完成'}</li>
+								<li class="time">${task.createTime}</li>
+								<li>
+									<a class="small-btn-error" data-id="${task.id}" data-index="${index}"  href="javascript:void(0)">删除</a>
+								</li>
+							</ul>
+						`
+					});
+					tastListTag.innerHTML = ulHtml; 
+					
+					let overLength = taskList.filter(t => t.status).length;
+					// 获取任务状态 并修改数据
+					document.querySelector(".task-status span:nth-of-type(1) b").innerText = taskList.length ;
+					document.querySelector(".task-status span:nth-of-type(2) b").innerText = overLength ;
+					document.querySelector(".task-status span:nth-of-type(3) b").innerText = taskList.length - overLength ;
+					
+					// 将 taskList 转成 JSON格式的字符串 (序列化)
+					let jsonstr = JSON.stringify(taskList) 
+					// 将数据存储到 localStorage 中 
+					localStorage.setItem("TASK-LIST", jsonstr);
+					
+				}
+				
+				
+				 // 给 输入框绑定 enter事件、给 btn 绑定单击事件
+				document.querySelector(".task").addEventListener("keydown", function(event){
+					if (event.keyCode === 13) {
+						// 添加任务 
+						addTask(this) ;
+					}
+				}) ;
+				
+				document.querySelector(".btn").addEventListener("click", function(event) {
+					addTask(this.previousElementSibling);
+				});
+				
+				
+				// 给 task-list 绑定 change 事件、
+				document.querySelector(".task-list").addEventListener("change", function(event){
+					
+					if (event.target.type == "checkbox") {
+						// 获取当前 checkbox 对应的数据 
+						let taskId = event.target.value ;
+						// 从 taskList 中查找 taskId 对应的任务 
+						let task = taskList.find(task => task.id == taskId) ;
+							
+						if (task) {
+							task.status = true ;
+						}
+						// 调用 showData 重新渲染数据
+						showData();
+					}
+					
+				})
+				
+				
+				document.querySelector(".task-list").addEventListener("dblclick", function(event){
+					// 如果 双击的是任务名、且未完成
+					if (event.target.className.trim() === "name") {
+						// 修改 editIndex 的值 当前要修改的行
+						editIndex = event.target.dataset.index ; 
+						showData();
+					}
+				})
+				
+				document.querySelector(".task-list").addEventListener("keydown", function(event){
+					// 如果 双击的是任务名、且未完成
+					if (event.target.nodeName == "INPUT" && event.target.type == "text") {
+						// 判断 按下的 ESC 还是 回车 
+						if (event.keyCode  === 13) {
+							// 按下了回车, 获取输入框的内容，并将内容写到 taskList 中 
+							let taskName = event.target.value.trim() ;
+							if (taskName === "") {
+								alert("任务名不能为空") ;
+								return ;
+							}
+							
+							// 查询任务名是否已经存在 
+							let task = taskList.find(task => task.name === taskName)
+							let taskId = event.target.parentNode.dataset.id ;
+							if (task!= null && taskId != task.id) {
+								alert("任务名已经存在");
+								return ;
+							}
+							// 将数据写入到 task 中 
+							task = taskList.find(task => task.id == taskId)
+							task.name = taskName ; 
+							//将 editIndex 设置未 -1 
+							editIndex = -1 ;
+							// 重新渲染数据
+							showData();
+							
+						}else if (event.keyCode === 27) {
+							// 按下了ESC
+							editIndex = -1 ;
+							showData();
+						}
+					}
+				})
+				
+				
+				document.querySelector(".task-list").addEventListener("click", function(event){
+					
+					if (event.target.className === "small-btn-error") {
+						if (confirm("您确定要删除该任务吗?")) {
+							let taskId = event.target.dataset.id ;
+							// 根据任务 ID 找到 该任务的索引
+							let index = taskList.findIndex(task => task.id  == taskId) ;
+							
+							if (index != -1) {
+								taskList.splice(index, 1) ; 
+								// 重新渲染
+								showData();
+							}
+						}
+					}
+				}) 
+				
+				// 页面所有的 DOM 加载完成后、执行 代码 
+				window.onload = showData ;
+				
+			})()
+		</script>
+		
+	</body>
+</html>

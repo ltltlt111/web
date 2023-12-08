@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        String.prototype.isTel = function () {
+            // 使用正则表达式验证是否是手机号
+            return /^1[3456789]\d{9}$/.test(this);
+        };
+
+
+        let number1 = "13812345678";
+        let number2 = "138123x5678";
+        let number3 = "110";
+        console.log(number1.isTel(), number2.isTel(), number3.isTel()); // 输出 true
+    </script>
+
+
+    <script>
+        String.prototype.capitalize = function () {
+            return this.toLowerCase().replace(/(^|\s)\S/g, function (match) {
+                return match.toUpperCase();
+            });
+        };
+
+        let words = "this is a test";
+        console.log(words.capitalize()); // 输出 "Hello World"
+    </script>
+
+    <script>
+        String.prototype.equalsIgnoreCase = function (str) {
+            // 将传入的字符串转为小写进行比较
+            return this.toLowerCase() === str.toLowerCase();
+        };
+
+        let str1 = "this is a test";
+        let str2 = "THIS is A test";
+        console.log(str1.equalsIgnoreCase(str2)); 
+    </script>
+
+    <script>
+        Date.prototype.format = function (pattern) {
+            let year = this.getFullYear();
+            let month = (this.getMonth() + 1 + "").padStart(2, "0");
+            let day = (this.getDate() + "").padStart(2, "0");
+            let hour = (this.getHours() + "").padStart(2, "0");
+            let min = (this.getMinutes() + "").padStart(2, "0");
+            let sec = (this.getSeconds() + "").padStart(2, "0");
+            let mill = (this.getMilliseconds() + "").padStart(3, "0");
+            let week = ["日", "一", "二", "三", "四", "五", "六"][this.getDay()];
+
+            return pattern.replace("%Y", year).replace("%m", month).replace("%d", day).replace("%H", hour).replace("%M", min).replace("%S", sec).replace("%s", mill).replace("%e", week);
+        }
+        // 示例使用：
+        var currentDate = new Date();
+        console.log(currentDate.format("%Y-%m-%d %H:%M:%S:%s %e"));
+    </script>
+
+    <script>
+        Array.prototype.removeIf = function (conditionFun) {
+            this.filter(conditionFun).forEach((element) => {
+                let index = this.indexOf(element);
+                this.splice(index, 1);
+            });
+        };
+
+        var numbers = [22, 8, 51, 13, 34, 9];
+        numbers.removeIf((num) => num > 30);
+        console.log(numbers); 
+    </script>
+
+
+    <script>
+
+        function Car(make, model) {
+            this.make = make;
+            this.model = model;
+        }
+
+        Car.prototype.start = function () {
+            console.log("Engine started!");
+        };
+
+        var myCar = new Car("haha", "Big");
+        myCar.start();
+
+
+        function Book(title, author) {
+            this.title = title;
+            this.author = author;
+        }
+
+        Book.prototype.displayInfo = function () {
+            console.log(`书名: ${this.title}, 作者: ${this.author}`);
+        };
+
+
+        var myBook = new Book("西游记", "施耐庵");
+        myBook.displayInfo(); 
+    </script>
+
+
+    <script>
+        
+    </script>
+</body>
+
+</html>

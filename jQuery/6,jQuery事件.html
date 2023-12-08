@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <div class="app">
+        <a href="" class="666">ddadadad</a>
+    </div>
+    <div class="app">
+        <a href="" class="777">adada</a>
+    </div>
+
+    <button>点击这里</button>
+    <!-- 
+        jQuery中事件绑定：默认为冒泡事件，没有捕获事件
+        on(events, selector, data, handler)
+
+        one(events, selector, data, handler)：绑定事件，该事件只能触发一次，特殊情况可以使用
+
+        off(events, selector, handler)：解绑事件
+
+        参数:
+
+        events：事件名称，可以同时绑定多个事件，用空格分开
+
+        selector：事件源(jQuery事件委托),可以给未来元素绑定事件，有则绑定，无则不绑定
+
+        data：事件处理函数中的event.data
+
+        handler：事件处理函数
+
+
+
+
+     -->
+
+
+    <script>
+        $(".app").on("click",{info:"哈哈哈"}, function (event) {
+            event.preventDefault();
+            console.log("点击了a标签");
+            console.log(this);
+            // 给event的额外参数，使用event.data获取
+            console.log(event.data);
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function reverseWordsFunction(string) {
+            let words = string.match(/[0-9A-Za-z]+/g);
+            if (words) {
+                return words.reverse().join(" ")
+            } else {
+                return str;
+            }
+        }
+        let inputWords = "you are good";
+        let inputWordsTwo = "there is a problem,and that need a solution"
+        let reverseWords = reverseWordsFunction(inputWords);
+        let reverseWordsTwo = reverseWordsFunction(inputWordsTwo);
+
+        console.log(reverseWords);
+        console.log(reverseWordsTwo);
+    </script>
+
+
+    <script>
+        function findLongestCommonPrefix(str1, str2) {
+            let minLength = Math.min(str1.length, str2.length);
+
+            let commonPrefixEndIndex = 0;
+            while (commonPrefixEndIndex < minLength && str1[commonPrefixEndIndex] === str2[commonPrefixEndIndex]) {
+                commonPrefixEndIndex++;
+            }
+
+            return str1.substring(0, commonPrefixEndIndex);
+        }
+        let str1 = "abcere123  ";
+        let str2 = "ab";
+        let result = findLongestCommonPrefix(str1, str2);
+        console.log(result);    
+    </script>
+
+
+    <script>
+        function findFirstUniqueChar(str) {
+            let charCount = {};
+            for (let char of str) {
+                charCount[char] = (charCount[char] || 0) + 1;
+            }
+            for (let char of str) {
+                if (charCount[char] === 1) {
+                    return char;
+                }
+            }
+            return "没有不重复的字符";
+        }
+        var inputString = "adfs23s23gd41ab";
+        var result_three = findFirstUniqueChar(inputString);
+        console.log(result_three);
+    </script>
+
+    <script>
+        function stringSum(str) {
+            let numbers = str.match(/\d+/g);
+
+            if (!numbers) {
+                return 0;
+            }
+            let sum = numbers.reduce((acc, num) => acc + parseInt(num, 10), 0);
+            return sum;
+        }
+
+        let inputStr2 = "aba66dafjw5d5wda";
+        let result_four = stringSum(inputStr2);
+        console.log(result_four);
+    </script>
+
+    <script>
+        function capitalizeFirstWords(str) {
+            let words = str.split(/\s+/);
+
+            let capitalizedWords = words.map(function (word) {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            });
+
+            let result = capitalizedWords.join(' ');
+
+            return result;
+        }
+
+        let inputStr = "hello world, hello Python";
+        let result_five = capitalizeFirstWords(inputStr);
+        console.log(result_five);
+    </script>
+
+    <script>
+        function startsWithHeOrNumber(str) {
+            return /^(he|\d)/.test(str);
+        }
+        var testString = "hello123";
+        var result1 = startsWithHeOrNumber(testString);
+        console.log(result1);
+
+        function containsNumber(str) {
+            return /\d/.test(str);
+        }
+        var testString = "abc123";
+        var result2 = containsNumber(testString);
+        console.log(result2);
+
+        function replaceNumbersWithAsterisks(str) {
+            return str.replace(/\d/g, '**');
+        }
+
+        var testString = "dhah444fwa4dw4fw4aw";
+        var result3 = replaceNumbersWithAsterisks(testString);
+        console.log(result3);
+
+        function maskPhoneNumber(phoneNumber) {
+            return phoneNumber.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+        }
+        var testPhoneNumber = "12345678901";
+        var result4 = maskPhoneNumber(testPhoneNumber);
+        console.log(result4);
+
+        function maskEmail(email) {
+            return email.replace(/^(\w)[^@]*(?=@)/, '$1***');
+        }
+        var testEmail = "hahaha@qq.com";
+        var result5 = maskEmail(testEmail);
+        console.log(result5);  
+    </script>
+
+
+    <script>
+        var array = [1, 2, 3, 4];
+        var transformedArray = array.map(function (num) {
+            return num ** 3 + 1;
+        });
+        console.log(transformedArray);
+
+        var array = [8, 'haha', 55, 'enen', 5, 2];
+        var filteredNumbers = array.filter(function (item) {
+            return typeof item === 'number';
+        });
+        var sumOfNumbers = filteredNumbers.reduce(function (acc, num) {
+            return acc + num;
+        }, 0);
+        console.log(sumOfNumbers);
+
+        var array = ['abc2', 'def', 'ghi'];
+        var allAreLetters = array.every(function (item) {
+            return /^[A-Za-z]+$/.test(item);
+        });
+        console.log(allAreLetters);
+
+        var array = [22, 1, -5, 88, 7, 12];
+        var resultMinMax = array.reduce(function (acc, num) {
+            return {
+                max: Math.max(acc.max, num),
+                min: Math.min(acc.min, num)
+            };
+        }, { max: -Infinity, min: Infinity });
+        console.log(resultMinMax);
+
+        var array = [1, 8, 2, 5, 8, 1, 23, 23, 4, 5];
+        var deduplicatedArray = array.reduce(function (acc, value) {
+            if (!acc.includes(value)) {
+                acc.push(value);
+            }
+            return acc;
+        }, []);
+        console.log(deduplicatedArray);
+
+        function numberToChinese(num) {
+            if (typeof num !== 'number' || isNaN(num)) {
+                return '请输入有效的数字';
+            }
+            var chinese = ['', '十', '百', '千'];
+            var numbers = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+
+            var numStr = num.toString();
+            var len = numStr.length;
+            let result = '';
+
+            for (let i = 0; i < len; i++) {
+                var digit = parseInt(numStr[i]);
+                var unit = len - i - 1;
+
+                if (digit !== 0) {
+                    result += numbers[digit] + chinese[unit];
+                } else {
+                    if (i < len - 1 && parseInt(numStr[i + 1]) !== 0) {
+                        result += numbers[digit];
+                    }
+                    else if (i === len - 1 && result === '') {
+                        result += numbers[digit];
+                    }
+                }
+            }
+            return result;
+        }
+        let number = 1203;
+        let chinese = numberToChinese(number);
+        console.log(chinese); 
+    </script>
+</body>
+
+</html>

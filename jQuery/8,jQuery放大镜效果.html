@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片放大镜</title>
+    <style>
+        /* 放大镜容器的样式 */
+        .magnifier-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 放大镜镜片的样式 */
+        .magnifier-glass {
+            position: fixed;
+            bottom: 0; /* 固定在屏幕底部 */
+            right: 0; /* 固定在屏幕右侧 */
+            border: 3px solid #000;
+            cursor: none;
+            width: 300px; /* 矩形的宽度 */
+            height: 200px; /* 矩形的高度 */
+            pointer-events: none; /* 保证放大镜不会干扰图像上的鼠标事件 */
+        }
+    </style>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 设置放大倍数
+            var magnifyLevel = 2;
+
+            // 获取图像并创建放大镜容器
+            var $image = $('img');
+            var $magnifierContainer = $('<div class="magnifier-container"></div>').insertAfter($image);
+
+            // 向容器添加放大镜镜片
+            var $magnifierGlass = $('<div class="magnifier-glass"></div>').appendTo('body'); // 注意这里添加到body
+
+            // 计算放大镜镜片的大小
+            var glassWidth = 300; // 矩形的宽度
+            var glassHeight = 200; // 矩形的高度
+
+            $image.mousemove(function (e) {
+                updateMagnifier(e);
+            });
+
+            // 添加滚轮事件监听
+            $image.on('wheel', function (e) {
+                e.preventDefault();
+
+                // 根据滚轮方向调整放大倍数
+                magnifyLevel += e.originalEvent.deltaY > 0 ? 0.1 : -0.1;
+
+                // 限制放大倍数的范围
+                magnifyLevel = Math.max(1, magnifyLevel);
+
+                // 更新放大镜
+                updateMagnifier(e);
+            });
+
+            function updateMagnifier(e) {
+                // 获取鼠标在图像内的坐标
+                var mouseX = e.pageX - $image.offset().left;
+                var mouseY = e.pageY - $image.offset().top;
+
+                // 计算放大镜镜片的位置
+                var glassX = window.innerWidth - glassWidth; // 固定在屏幕右侧
+                var glassY = window.innerHeight - glassHeight; // 固定在屏幕底部
+
+                // 设置放大镜镜片的背景
+                $magnifierGlass.css({
+                    "background-image": "url('" + $image.attr('src') + "')",
+                    "background-size": ($image.width() * magnifyLevel) + "px " + ($image.height() * magnifyLevel) + "px",
+                    "background-position": -mouseX * magnifyLevel + (glassWidth / 2) + "px " + -mouseY * magnifyLevel + (glassHeight / 2) + "px"
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <!-- 使用jQuery实现图片放大镜效果 -->
+    <img src="./img/dragon.jpg" alt="">
+</body>
+
+</html>

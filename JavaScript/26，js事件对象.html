@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>测试</p>
+
+    <a href="https://www.baidu.com">测试</a>
+
+    <div id="outer">
+        <div id="middle">
+            <div id="inner">点击这里</div>
+        </div>
+    </div>
+
+    <form action="https://www.baidu.com">
+        <input type="text" name="xx">
+        <input type="submit" value="提交数据">
+    </form>
+
+    <textarea placeholde="请输入留言信息" id="" cols="30" rows="10"></textarea>
+    <!-- 
+        event事件对象常见的属性 / 方法
+
+            - target：获取触发事件的源对象
+            - preventDefault()：阻止默认行为
+                常见的拥有默认行为的标签：
+                    a标签默认跳转行为和click冲突
+                    textarea多行文本框回车换行和键盘按下事件冲突
+                    form表单的自动提交配合type=submit按钮自动提交表单和onsubmit事件冲突
+            - keyCode：获取按下的键的编码(配合键盘事件)
+                - 13代表回车键Enter
+                - 27代表ESC
+                - 32代表空格
+                - 方向键左上右下：37 38 39 40
+                - A-Z：65...
+                - 0-9：48...
+
+            - stopPropagation()：阻止事件冒泡或者事件捕获行为，冒泡应从子元素阻止，捕获应从父元素阻止
+    
+            - altkey：是否触发了alt键
+            - shiftkey：是否触发了shift键
+            - ctrlkey：是否触发了ctrl键
+    -->
+    <script>
+        document.querySelector("p").addEventListener("click", function(event){
+            event.preventDefault();
+            // console.log(event.target);
+            console.log(this);
+        });
+
+
+        document.querySelector("textarea").addEventListener("keydown", function(event){
+            if(event.keyCode === 13){
+                event.preventDefault();
+            }
+        })
+
+
+        document.querySelector("form").addEventListener("submit", function(event){
+            event.preventDefault();
+            let text = this.children[0].value;
+            if(/^\d+$/.test(text)){
+                this.submit();
+            }
+        })
+    </script>
+
+    <script>
+        let outerDiv = document.querySelector("#outer")
+        let middleDiv = document.querySelector("#middle")
+        let innerDiv = document.querySelector("#inner")
+
+        outerDiv.addEventListener("click",function(event){
+            console.log("outerDiv clicked");
+        })
+
+        middleDiv.addEventListener("click",function(event){
+            event.stopPropagation();
+            console.log("middleDiv clicked");
+        })
+
+        innerDiv.addEventListener("click",function(event){
+            console.log("innerDiv clicked");
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+        jQuery获取修改属性方法：
+        attr(prop)：获取元素的属性值
+        attr(prop, val)：修改或者添加元素的属性值
+        removeAttr(prop)：删除元素的属性值
+
+        根据类似于required,disabled这种键和值一样的特殊属性，jQuery给了特殊方法
+        prop(key)：获取元素的特殊属性值，返回的结果是布尔类型
+        prop(key, val/fn)：修改或者添加元素的特殊属性值
+        removeProp(key)：删除元素的特殊属性值
+        prop相关的三个方法应用于属性值为布尔类型的属性，如：disabled,checked,selected,readOnly,required...
+
+        操作style属性
+        css(propertyName)：获取元素的css样式值
+        css(propertyName, value)：修改或者添加元素的css样式值
+        css({key:val, key:val})：批量修改或者添加元素的css样式值
+
+        操作class属性
+        addClass(className)：为元素添加类名
+        removeClass(className)：为元素删除类名
+        toggleClass(className)：为元素切换类名，有则删除无则添加
+        hasClass(className)：判断元素是否包含某个类名，返回布尔类型
+
+     -->
+    <div class="app">
+        <a href="">大大大大大</a>
+    </div>
+    <div class="app">
+        <a href="">大大大大大</a>
+
+    </div>
+
+    <a href="">大大大大大</a>
+
+    <button>点击</button>
+
+    <script>
+        let tags = $("div.app");
+
+        // console.log(tags.attr("class"));
+        // tags.attr("name", "app");
+
+        // tags.removeAttr("name");
+
+        $("button").attr("disabled", true);
+
+        // console.log($("button").attr("disabled"));
+
+        // $("button").removeAttr("disabled");
+
+        // console.log($("button").attr("disabled"));
+
+
+        console.log($("button").prop("disabled"));
+
+        tags.css("background-color", "red");
+
+
+        tags.css({
+            "background-color": "red",
+            "font-size": "100px"
+        })
+
+        tags.addClass("a b c");
+
+        // tags.removeClass("a b c");
+
+        console.log(tags.hasClass("a b c"));
+
+
+        tags.toggleClass("a b c");
+        
+
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {name:"张三",sex:"男", age:20,tel:"224646611"}
+    
+        // // ...除解构出来之外的剩余所有
+        // let {name,sex:s, ...x} = obj;
+        // // 如果解构不到就是undefined
+        // console.log(name,s,x);
+
+        // 也可以设置默认值,解构值是undefined时，默认值才会生效
+        let {name,age:a=18,...x} = obj
+        console.log(name,a,x);
+
+
+
+    </script>
+
+    <script>
+        let obj1 = {name:"张三", sex:"男",age:20,tel:[{"火警":"119"},{"救护车":"120"},{"公安":"110"}]}
+        let {tel:[,,{"公安":telnum}]} = obj1;
+        console.log(telnum);
+    </script>
+
+    <script>
+        // 对象展开操作
+        let obj2 = {name:"李四",sex:"男",tel:"224646611"}
+        let obj3 = {name:"张三",age:20,tel:[{"火警":"119"},{"救护车":"120"},{"公安":"110"}]}
+        
+        let obj4 = {...obj2, obj3}
+        console.log(obj4);
+    </script>
+</body>
+</html>

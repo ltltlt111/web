@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        js选择器如果选中了多个元素，会返回一个形似数组的对象，可以通过索引取值，还可以将形似数组的对象转为数组Array.from，还可以使用for...of遍历，还可以使用...展开
+        - dom基础选择器
+            ID选择器：document.getElementById(id), 只能选择满足条件的第一个元素
+            标签选择器：document.getElementsByTagName(name)：根据标签名选择元素，返回多个满足条件的元素，返回形似数组的对象
+            类选择器：document.getElementsByClassName(class)：根据class属性名选择满足条件的多个元素，返回形似数组的对象
+            name选择器：document.getElementsByName(name)：根据name属性名选择满足条件的多个元素，返回形似数组的对象
+
+            css选择器：document.querySelector(css选择器)：根据css选择器选择满足条件的第一个元素
+            css选择器：document.querySelectorAll(css选择器)：根据css选择器选择满足条件的所有元素，返回形似数组的对象
+    
+            querySelector和querySelectorAll同样是元素的方法
+        -->
+    <p id="test" class="a" name="xx">
+        <i>新浪</i>
+    </p>
+    <p class="b" name="xx">测试2</p>
+
+    <script>
+        // let ptag = document.getElementById("test")
+        // console.log(ptag);
+
+        // let ptags = document.getElementsByTagName("p")
+        // console.log(Array.from(ptags));
+
+        // let ptags = document.getElementsByClassName("a")
+        // console.log(ptags);
+
+        // let ptags = document.getElementsByName("xx")
+        // console.log(ptags);
+
+
+        let x = document.querySelector("[name=xx]").querySelector("i")
+        console.log(x);
+    </script>
+</body>
+</html>

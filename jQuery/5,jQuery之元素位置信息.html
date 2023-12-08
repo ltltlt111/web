@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <style>
+       #app{
+        width: 300px;
+        height: 300px;
+        padding: 20px;
+        margin: 50px;
+        background-color: red;
+        border: 10px solid blue;
+        transform: translate(120px 150px);
+       } 
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        $(function(){
+            // 获取app
+            let app = $("#app");
+
+            // 1,获取盒子自身的宽度和高度
+
+            // width()：获取容器内容占用的宽度
+            console.log(app.width());
+            // height()：获取容器内容占用的高度
+            console.log(app.height());
+
+            // innerWidth()：获取不包含边框的盒子宽度
+            console.log(app.innerWidth());
+            // innerHeight()：获取不包含边框的盒子高度
+            console.log(app.innerHeight());
+
+            // outerWidth()：获取包含边框的盒子宽度
+            console.log(app.outerWidth());
+            // outerHeight()：获取包含边框的盒子高度
+            console.log(app.outerHeight());
+
+            // outerWidth(true)：获取包含边框和外边距的盒子宽度
+            console.log(app.outerWidth(true));
+            // outerHeight(true)：获取包含边框和外边距的盒子高度
+            console.log(app.outerHeight(true));
+
+            // 2，获取盒子的位置信息
+
+            // offset()：获取盒子相对于文档的位置信息
+            console.log(app.offset());
+
+            // position()：获取盒子外边距距离它最近的具有定位的父元素内侧边框的位置信息
+            console.log(app.position());
+
+            // 3，获取盒子的滚动信息
+
+            // scrollTop()：获取盒子垂直滚动条的滚动距离
+            console.log(app.scrollTop());
+
+            // scrollLeft()：获取盒子水平滚动条的滚动距离
+            console.log(app.scrollLeft());
+
+            // 4，设置盒子的滚动信息
+
+            // scrollTop(value)：设置盒子垂直滚动条的滚动距离
+            app.scrollTop(100);
+
+            // scrollLeft(value)：设置盒子水平滚动条的滚动距离
+            app.scrollLeft(100);
+
+        })
+    </script>
+</body>
+</html>

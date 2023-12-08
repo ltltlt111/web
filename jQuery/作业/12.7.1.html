@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.js"></script>
+    <style>
+        .heart {
+            font-size: 20px;
+            cursor: pointer;
+            color: #ccc;
+        }
+
+        .heart.active {
+            color: #ff6060;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // 单击事件处理
+            $('.heart').click(function () {
+                // 移除所有元素的 active 类
+                $('.heart').removeClass('active');
+
+                // 获取当前元素的索引
+                let index = $(this).index();
+
+                // 添加 active 类到当前元素及之前的元素
+                for (let i = 0; i <= index; i++) {
+                    $('.heart').eq(i).addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

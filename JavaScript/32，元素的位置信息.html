@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .app{
+            width: 300px;
+            height: 300px;
+            border: 5px solid black;
+            background-color: red;
+            margin: 30px 100px;
+            padding: 50px;
+            white-space: nowrap;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶
+    </div>
+    <!-- 
+        clientWidth：获取盒子的可视大小(内容宽和左右内边距)
+        clientHeight：获取盒子的可视大小(内容的高和上下内边距)
+        clientLeft：获取盒子的左侧边距宽度
+        clientTop：获取盒子的上边框宽度
+
+
+        scrollWidth：获取元素的滚动宽度(带有滚动条效果)，如果元素内容没有溢出或滚动，效果就等同于clientWidth
+        scrollHeight：获取元素的滚动高度
+        scrollLeft：滚动条在盒子上的距离左侧内容隐去的宽度
+        scrollTop：滚动条在盒子上的距离顶部内容隐去的宽度
+
+        offsetWidth/offsetHeight：获取盒子的大小(边框+内容+垂直内边距)
+        offsetLeft：盒子距离离它最近的父元素(如果所有父元素没有定位则距离浏览器)的左侧内边框的距离
+        offsetTop：盒子距离离它最近的父元素(如果所有父元素没有定位则距离浏览器)的顶部内边框的距离
+
+
+        offsetParent：距离离他最近的父元素
+
+        getBoundingClientRect()：获取元素相对于浏览器的位置信息
+        
+    -->
+    <script>
+        // 获取app对应的元素
+        let tag = document.querySelector(".app");
+        console.log("clientWidth",tag.clientWidth);
+        console.log("clientHeight",tag.clientHeight);
+        console.log("clientLeft",tag.clientLeft);
+        console.log("clientTop",tag.clientTop);
+
+        console.log("scrollWidth",tag.scrollWidth);
+        console.log("scrollHeight",tag.scrollHeight);
+        console.log("scrollLeft",tag.scrollLeft);
+        console.log("scrollTop",tag.scrollTop);
+
+        console.log("offsetWidth",tag.offsetWidth);
+        console.log("offsetHeight",tag.offsetHeight);
+        console.log("offsetLeft",tag.offsetLeft);
+        console.log("offsetTop",tag.offsetTop);
+
+
+        console.log("offsetParent",tag.offsetParent);
+
+        console.log(tag.getBoundingClientRect);
+
+    </script>
+</body>
+</html>

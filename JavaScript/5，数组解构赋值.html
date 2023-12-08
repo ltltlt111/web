@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let array = [23, 45, 657, 12, 32, 8, 12];
+        // // 获取数组中的第一个元素并赋值给a
+        // let a = array[0]
+        // // 获取数组中的第二个元素并赋值给b
+        // let b = array[1]
+        // // 获取数组中的剩余的元素并赋值给c
+        // let c = array.slice(2)
+        // console.log(a,b,c);
+
+        // 获取数组中的第一个元素并赋值给a,获取数组中的第一个元素并赋值给a,获取数组中第三个并赋值给c
+        let [a, b, c] = array
+        console.log(a, b, c);
+
+        // 第一个元素并赋值给a1，第二个元素并赋值给b1，剩余的元素并赋值给c1
+        // ...接收剩余元素只能放到最后一个位置
+        let [a1, b1, ...c1] = array
+        console.log(a1, b1, c1);
+
+        // 获取数组中的第一个元素和第三个元素赋值给d和e
+        let [d, , e] = array
+        console.log(d, e);
+
+        // 如果多了
+        let array2 = [1, 53, 12];
+        // 解构不到数值就是undefined
+        let [f, g, h, i] = array2;
+        console.log(f, g, h, i);
+
+        // 结构赋值还可以给数据设置默认值（剩余参数不能加默认值，会解构成空数组）
+        let [a2 = 1, b2 = 0, ...c2] = []
+        console.log(a2, b2, c2);
+
+        let array3 = [3, null, 20]
+        let [a3, b3, c3] = array3
+        console.log(a3, b3, c3);
+
+        // 对 entries中的键和值 进行解构赋值
+        for (let [key, val] of array.entries()) {
+            console.log(key, val);
+        }
+
+        let array4 = [12, 42, [32, 44, 1], 23, 7]
+        // 使用解构赋值得到44
+        let [, , [, r]] = array4
+        console.log(r);
+
+
+    </script>
+    <script>
+        let arrays = [1, 5, 3, 2];
+        let { 0: aa, 1: bb, 2: cc, 3: dd, length: len } = arrays
+        console.log(aa, bb, cc, dd, len);
+    </script>
+</body>
+
+</html>

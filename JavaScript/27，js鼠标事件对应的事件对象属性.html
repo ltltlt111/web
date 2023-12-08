@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pad{
+            width: 300px;
+            height: 200px;
+            background-color: #999;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="pad">
+
+    </div>
+
+    <div class="main">
+        <p>测试数据</p>
+    </div>
+
+
+    <script>
+        document.querySelector(".pad").addEventListener("mousewheel",function(event){
+            console.log(this);
+            let main = document.querySelector(".main")
+            if(event.wheelDelta > 0){
+                main.style["font-size"] = parseInt(main.style.fontSize == "" ? "16px" : main.style.fontSize) + 2 + "px";
+            }else{
+                main.style["font-size"] = parseInt(main.style.fontSize == "" ? "16px" : main.style.fontSize) - 2 + "px";
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        replaceChild(node,child)：将子元素child替换成node
+        replaceWith(node...)：将选中的元素替换为多个或一个node
+        cloneNode(deep)：克隆节点，是否深度克隆
+     -->
+    <div id="app">
+        <input type="text">
+    </div>
+
+
+    <script>
+        let text = document.createTextNode("测试数据")
+        let input = document.querySelector("#app input")
+        document.querySelector("#app").replaceChild(text, input)
+
+        document.querySelector("#app").replaceWith(node)
+    </script>
+</body>
+</html>

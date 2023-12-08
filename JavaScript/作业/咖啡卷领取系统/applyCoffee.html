@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/index.css" th:href="@{/static/css/index.css}" type="text/css">
+    <title>奇酷</title>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/sysconfig.js"></script>
+    <script src="./js/xx.js"></script>
+</head>
+
+<body ontouchstart="">
+    <header class="header">奇酷-咖啡卷申请</header>
+    <form action="" id="coffee-form">
+        <div class="container">
+            <textarea class="text" name="reason" prop="reason" placeholder="请简单填写申请原因"></textarea>
+            <select class="select" name="userId" prop="userId">
+                <option value="">请选择审核人</option>
+            </select>
+            <button class="btn">申请</button>
+        </div>
+
+    </form>
+
+    <footer class="footer">
+        <a href="./applyCoffee.html" class="apply active">申请咖啡卷</a>
+        <a href="./orderCoffee.html" class="juan">我的咖啡卷</a>
+    </footer>
+    <script>
+        API.getTeachers().then(ret => {
+            console.log(ret.data);
+            if (ret.status) {
+                let options = `<option value="">请选择审核人</option>`;
+                for (let opt of ret.data) {
+                    console.log(opt);
+                    options += `<option value="${opt.id}">${opt.name}</option>`;
+                }
+                document.querySelector(".select").innerHTML = options;
+            }
+        })
+
+        let form = document.querySelector("#coffee-form");
+
+        form.rules = {
+            reason: [
+                {
+                    required: true,
+                    message: "申请原因不能为空"
+                }, {
+                    minlength: 6,
+                    message: "申请原因不能少于六位数"
+                }
+            ],
+            userId: [
+                {
+                    required: true,
+                    message: "审核人不能为空"
+                }
+            ]
+        }
+        form.validate(data => {
+            API.applyCoffee(data).then(ret => {
+                if (ret.status) {
+                    form.reset();
+                    alert("申请成功，请联系审核人完成订单审核")
+                }else{
+                    alert(ret.message)
+                }
+
+            })
+            console.log(data);
+        })
+    </script>
+</body>
+
+</html>

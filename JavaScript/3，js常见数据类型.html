@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /** 
+         * python中常见数据类型：
+         * int, float, bool(true,false), None, str, list, tuple, dict, set
+         * python查看数据类型：type()
+         * JavaScript 中常见数据类型
+         * Number,Boolean,String,Array,Object,null
+         * js查看数据类型：typeof(a)
+        */
+        let a = 10;
+        console.log(a, typeof (a));
+
+
+        let b = true;
+        console.log(b, typeof (b));
+
+        let c = "'测试'";
+        let d = `dajdjf
+       dkwakdka
+       amfkafwpwaf`
+        console.log(c, typeof (c), d, typeof (c));
+
+        let e = [1, 2, 3, 4, 5, 6]
+        console.log(e, typeof (e));
+        console.log(Object.prototype.toString.call(e));
+
+        let f = { "a": 1, "b": 2 };
+        console.log(f, typeof (f), Object.prototype.toString.call(f));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let obj = {};   // 定义一个空对象
+
+        let obj = { name: "张三", age: 20 };
+
+        // 向对象中添属性(如果使用.调用属性，属性名必须满足标识符命名规范
+        // 命名规范:字母，数字，下划线，$组成，不能以数字开头且不能使用js中的关键字
+        // js变量名，函数名遵循小驼峰命名法
+
+        // .调用
+        obj.birthday = "1990-10-10";
+        // 中括号语法，此时属性名可以不遵循命名规范
+        obj["telephone"] = "13312345678";
+
+
+        // 修改属性
+        obj.name = "李四";
+        obj["birthday"] = "2000-10-10";
+
+        // 删除属性
+        delete obj.age;
+
+        // 查看属性
+        console.log(obj.name);
+        console.log(obj["name"]);
+        console.log(obj);
+
+        // 遍历对象
+        for (let key in obj) {
+            let val = obj[key]
+            console.log(key, val);
+        }
+
+
+        console.log(Object.keys(obj));
+        for (let key of Object.keys(obj)) {
+            console.log(key, obj[key]);
+        }
+
+        for (let val of Object.values(obj)) {
+            console.log(val)
+        }
+
+        for (let [key, val] of Object.entries(obj)) {
+            console.log(key, val)
+        }
+
+
+        let obj1 = {name:"张三"};
+
+        // 给obj1对象动态添加一个sex性别属性，且性别属性一旦设置不允许更改
+        Object.defineProperty(obj1, "sex", {
+            // writable:true,      // 是否允许修改
+            // value:"男",         // 配合writable设置该属性默认值
+            configurable:true,  // 是否允许删除
+            enumerable:true,    // 控制属性是否可枚举
+            set:function(val){
+                this._sex = val;
+            }, // 设置这个属性不能设置writable和value两个属性，否则会冲突
+            get:function(){
+                return this.val
+            } // 与set一起使用
+        })
+        obj1.sex = "男"
+        console.log(obj1);
+    </script>
+</body>
+
+</html>

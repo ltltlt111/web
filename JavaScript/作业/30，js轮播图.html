@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {margin:0; padding: 0;}
+			.swiper {
+				width: 900px;
+				height: 300px;
+				margin: 0 auto;
+				background-color: red;
+				position: relative;
+			}
+			
+			.swiper img {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				display: none;
+			}
+			
+			.swiper img:first-child {
+				display: block;
+			}
+			
+			.swiper .dot {
+				position: absolute;
+				height: 60px;
+				width: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				bottom: 0;
+				text-align: center;
+				line-height: 70px;
+				font-size: 0;
+			}
+			
+			.swiper .dot span {
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				background-color: #fff;
+				border-radius: 50%;
+				margin: 0 5px;
+				cursor: pointer;
+			}
+			
+			.swiper .dot .active {
+				width: 30px;
+				border-radius: 5px;
+			}
+			
+			.swiper .direction {
+				position: absolute;
+				height: 70px;
+				width: 42px;
+				background-image: url(./img/icon-slides.png);
+				background-repeat: no-repeat;
+				top: 85px;
+				cursor: pointer;
+			}
+			
+			.swiper .left {
+				background-position: -84px 0;
+			}
+			
+			.swiper .right {
+				right: 0 ;
+				background-position: -124px 0;
+			}
+			.swiper .left:hover {
+				background-position: 0 0;
+			}
+			
+			.swiper .right:hover {
+				background-position: -42px 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="swiper">
+			<img src="./img/1.jpeg" alt="">
+			<img src="./img/2.jpeg" alt="">
+			<img src="./img/3.jpeg" alt="">
+			<img src="./img/4.jpeg" alt="">
+			
+			<div class="dot">
+				<span class="active" data-id="0"></span>
+				<span  data-id="1"></span>
+				<span  data-id="2"></span>
+				<span  data-id="3"></span>
+			</div>
+			
+			<div>
+				<p class="direction left"></p>
+				<p class="direction right"></p>
+			</div>
+		</div>
+	
+		
+		<script>
+			
+			(function() {
+				let index = 0 ;  //定义一个索引，用来表示默认显示的 是第一张 图片
+				let swiper = document.querySelector(".swiper") ; 
+				let playing = false ; 
+				// 获取 所有轮播图图片的个数 
+				let allImg = document.querySelectorAll(".swiper > img") ;
+				
+				// 用来显示 索引 为 i 位置的图片
+				function showImg(i) {  
+					//1. 将 index 位置的图片隐藏 
+					document.querySelector(`.swiper img:nth-child(${index + 1})`).style.display = "none" ;
+					//2. 将 i 位置的图片显示 
+					document.querySelector(`.swiper img:nth-child(${i + 1})`).style.display = "block" ;
+					
+					//3. 更改 轮播图中的指示器
+					document.querySelector(`.swiper .dot span:nth-child(${index + 1})`).classList.remove("active");
+					document.querySelector(`.swiper .dot span:nth-child(${i + 1})`).classList.add("active");
+					//4. 将 i 的值 赋值给 index 
+					index = i ;
+				}
+				
+				// 给 right 绑定 单击事件 
+				document.querySelector(".swiper .right").addEventListener("click", function(event) {
+					if (index + 1 === allImg.length) {
+						showImg(0);
+					}else{
+						showImg(index + 1) ;
+					}
+				})
+				
+				document.querySelector(".swiper .left").addEventListener("click", function(event) {
+					if (index === 0) {
+						showImg(allImg.length - 1);
+					}else{
+						showImg(index - 1) ;
+					}
+				})
+				
+				// 自动执行轮播图 
+				function autoPlay() {
+					playing = setInterval(function() {
+						document.querySelector(".swiper .right").dispatchEvent(new Event("click"));
+					}, 2000);
+				}
+				
+				// 给 swiper 绑定 鼠标悬停事件 
+				swiper.addEventListener("mouseover", function(event) {
+					clearInterval(playing) ;
+					playing = false ;
+				})
+				
+				swiper.addEventListener("mouseout", autoPlay) ;
+				
+				
+				// 给 dot 绑定 单击事件 (事件委托 、span)
+				document.querySelector(".swiper .dot").addEventListener("click", function(event) {
+					if (event.target.nodeName === "SPAN") {
+						let index = event.target.dataset.id - 0;
+						showImg(index);
+					}
+				})
+				
+				
+				autoPlay();
+				
+				
+			})() 
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/form-validtion.js"></script>
+</head>
+
+<body>
+    <form action="">
+        <div>
+            <label for="">姓名</label>
+            <input name="username" prop="username" required type="text">
+        </div>
+        <div>
+            <label for="">班级</label>
+            <input name="classname" prop="classname" required type="password">
+        </div>
+        <div>
+            <label for="">密码</label>
+            <input name="password" prop="password" required type="password">
+        </div>
+        <div>
+            <label for="">确认密码</label>
+            <input name="password2" prop="password2" required type="password">
+        </div>
+        <div prop="sex">
+            <label for="">性别</label>
+            <input type="radio" name="sex" value="m">男
+            <input type="radio" name="sex" value="w">女
+        </div>
+        <div>
+            <input type="submit" value="注册">
+        </div>
+
+        <script>
+            let formTag = document.querySelector("form")
+            console.log(formTag);
+            formTag.rules = {
+                username: [
+                    {
+                        required: true,
+                        message: "用户名不能为空",
+                    },
+                    {
+                        pattern: /^[\u4e00-\u9fa5]{2,5}$/,
+                        message: "用户名格式不正确"
+                    },
+                ],
+                classname: [
+                    {
+                        required: true,
+                        message: "班级不能为空",
+                    },
+                    {
+                        pattern: /^[A-Za-z][0-9]{4}$/,
+                        message: "班级格式不正确"
+                    }
+                ],
+                password: [
+                    {
+                        required: true,
+                        message: "密码不能为空",
+                    },
+                    {
+                        maxlength: 20,
+                        message: "密码最长长度为20！",
+                    },
+                    {
+                        minlength: 6,
+                        message: "密码最短长度为6！",
+                    }
+                ],
+                password2: [
+                    {
+                        required: true,
+                        message: "确认密码不能为空",
+                    },
+                    {
+                        validator: function (val) {
+                            let password1 = document.querySelector("[name=password]").value;
+
+                            return password1 === val;
+
+                        },
+                        message: "两次密码不一致！"
+                    }
+                ],
+                sex: [
+                    {
+                        required: true,
+                        message: "性别不能为空",
+                    }
+                ]
+            }
+            formTag.validate(function (data) {
+                let username = document.querySelector("[name=username]").value;
+                let password = document.querySelector("[name=password]").value;
+                let item = localStorage.getItem(username);
+                if (item) {
+                    alert("用户名已存在！");
+                } else {
+                    localStorage.setItem(username, password);
+                    alert("注册成功！点击确定前往登陆页面！");
+                    window.location.href = "11.30_登录.html";
+
+                }
+            })
+
+        </script>
+    </form>
+</body>
+
+</html>

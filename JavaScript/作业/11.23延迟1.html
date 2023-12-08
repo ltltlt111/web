@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function test(){
+            alert("这是子页面的函数执行了")
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="countdown">10</h1>
+    <button id="startButton" onclick="startCountdown()">开始倒计时</button>
+
+    <input type="text" class="user" >
+
+
+    <script>
+        function startCountdown() {
+            // 根据id找到两个标签
+            let countdownElement = document.getElementById("countdown");
+            let count = parseInt(countdownElement.innerText);
+            // 设置句柄
+            let countdownInterval = setInterval(function () {
+                count--;
+
+                if (count >= 0) {
+                    countdownElement.innerText = count;
+                } else {
+                    // 传入句柄清空延迟
+                    clearInterval(countdownInterval);
+                    alert("倒计时结束！");
+                }
+            }, 1000);
+        }
+    </script>
+
+
+    <!-- 子页面操控父页面 -->
+    <button onclick="bigSize()" >点击放大父html字体</button>
+
+    <script>
+        function bigSize(){
+            // parent 是父页面
+            // top是最顶层页面
+            let p = parent.document.querySelector(".t")
+            let size = p.style["font-size"] || "16px"
+            p.style.fontSize = parseInt(size) + 2 + "px"
+            // console.log(p);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p>
+        <a href="">测试</a>
+        <b>测试</b>
+
+    </p>
+    <script>
+        // 获取p标签
+        let tag = document.querySelector("p")
+
+        // 获取元素的名称,返回全大写表示形式
+        console.log(tag.tagName)
+        console.log(tag.nodeName);
+
+        // 获取标签体文本内容
+        console.log(tag.innerText);
+        // 修改标签体文本内容(整个标签内容，只会获取和修改文本内容)
+        // tag.innerText = "hello world"
+        // 获取或修改标签体中的超文本内容
+        console.log(tag.innerHTML);
+        tag.innerHTML = "<a href='www.baidu.com'>哈哈哈</a>"
+
+
+        
+    </script>
+</body>
+</html>

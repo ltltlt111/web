@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./js/string.js"></script>
+    <script>
+        // 创建一个时间对象，代表当前时间
+        let date = new Date();
+        console.log(date);
+
+
+        // 创建一个距离1970年1月1日的毫秒数的时间
+        let date2 = new Date(1000)
+        console.log(date2);
+
+
+        // 月份从0开始，0代表1月
+        let date3 = new Date(2000,10,11,30,25,50)
+        console.log(date3);
+
+        // 获取时间戳
+        console.log(date.getTime());
+
+        // 获取年份
+        console.log(date.getFullYear());
+
+        // 获取月份
+        console.log(date.getMonth());
+
+        // 获取天
+        console.log(date.getDate());
+
+        // 获取小时
+        console.log(date.getHours());
+
+        // 获取分钟
+        console.log(date.getMinutes());
+
+        // 获取秒数
+        console.log(date.getSeconds());
+
+        // 获取毫秒
+        console.log(date.getMilliseconds());
+
+        // 获取星期,  0代表周日
+        console.log(date.getDay());
+
+
+        // 日期格式化
+        console.log(date.format("%Y-%m-%d %H:%M:%S:%s week:%e "));
+    </script>
+</body>
+</html>

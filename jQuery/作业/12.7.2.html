@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+    <div>
+        <label><input type="checkbox" id="selectAll"> 全选</label>
+        <br>
+        <label><input type="checkbox" class="activity"> 游泳</label>
+        <label><input type="checkbox" class="activity"> 爬山</label>
+        <label><input type="checkbox" class="activity"> 学习</label>
+        <label><input type="checkbox" class="activity"> 唱歌</label>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // 全选/取消全选事件处理
+            $('#selectAll').change(function () {
+                // 获取全选复选框的状态
+                let isChecked = $(this).prop('checked');
+
+                // 将所有活动复选框的状态设置为与全选复选框相同
+                $('.activity').prop('checked', isChecked);
+            });
+
+            // 单个活动复选框事件处理
+            $('.activity').change(function () {
+                // 如果所有活动复选框都被选中，则设置全选复选框为选中状态，否则设置为未选中状态
+                $('#selectAll').prop('checked', $('.activity:checked').length === $('.activity').length);
+            });
+        });
+    </script>
+</body>
+
+</html>

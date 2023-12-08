@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/asyn-request.js"></script>
+</head>
+<body>
+    <script>
+        jsoup("https://restapi.amap.com/v3/config/district?key=53d8388c9ef096c4ace768ea052bc508&subdistrict=1")
+        .then(ret => {
+            let data = ret.districts[0].districts;
+            data.forEach(pro => {
+                let pTag = document.createElement("p");
+
+                pTag.innerText = pro.name;
+                document.body.appendChild(pTag);
+            })
+        })
+
+    </script>    
+</body>
+</html>

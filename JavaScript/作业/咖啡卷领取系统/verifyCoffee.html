@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/index.css" th:href="@{/static/css/index.css}" type="text/css">
+    <title>奇酷</title>
+    <script src="./js/xx.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/sysconfig.js"></script>
+</head>
+
+<body ontouchstart="">
+    <header class="header">奇酷-咖啡卷审核列表</header>
+
+    <div class="container">
+        <ul class="item head">
+            <li class="user">申请人</li>
+            <li class="time">申请时间</li>
+            <li class="opt">操作</li>
+        </ul>
+    </div>
+
+    <script>
+        API.getAllNoVertifyCoffeeList()
+            .then(ret => {
+                if (ret.data !== null) {
+                    console.log(ret.data);
+                    let dataDetail = ret.data;
+                    let applyList = `<ul class="item head"><li class="user">申请人</li><li class="time">申请时间</li><li class="opt">操作</li></ul>`
+                    for (let list of dataDetail) {
+                        applyList += `<ul class="item"><li class="user">${list.name}</li><li class="time">${list.createTime}</li><li class="opt"><a class="primary" href="./verifyPage.html?cid=${list.id}" th:href="@{/teacher/verify/1}">审核</a><a onclick="cancel(${list.id})" class="error">取消</a></li></ul>`
+                    }
+                    document.querySelector(".container").innerHTML = applyList;
+                    let commits = document.querySelectorAll(".primary");
+                }
+            })
+        
+        function cancel(cid){
+            API.cancelCoffeeOrder(cid).then(ret => {
+                console.log(ret);
+                if(ret.status){
+                    alert(ret.message);
+                    location.reload();
+                }else{
+                    alert(ret.message);
+                }
+            })
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

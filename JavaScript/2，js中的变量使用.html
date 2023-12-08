@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script>
+        // 声明变量a
+        var a;
+        // 同时声明两个变量a,b
+        var a,b;
+        // 给变量赋值
+        a = 6;
+        var a = 10;
+        var a = 20;
+        // 同时给多个变量定义赋值
+        var a =3,b=4,c;
+        // 在控制台输出a
+        console.log(a,b,c);
+        console.log(window.a,window.b,window.c);
+    </script> -->
+
+
+    
+<!-- 
+    <script>
+        console.log(a);  // 产生错误，提示a未定义
+        var a = 100; // 此时上面也不会报错(变量提升:先使用再声明)
+        console.log(a);
+    </script> -->
+
+    <!-- <script>
+        var a = 3;
+        var a ;
+        console.log(a);  // 3
+        
+        let b = 3;
+        let b = 4; // 抛出错误 
+        console.log(b);  
+    </script> -->
+
+
+    <!-- <script>
+        let a = 3;
+        if (a >= 3){
+            a = 10;   // 程序报错，let a = 10会导致锁死这个if语句中的代码，在let a = 10之前不允许使用a
+            let a = 10;
+            console.log(a);
+        }
+    </script> -->
+
+
+    <script>
+        let a = 10;
+        console.log(a);
+    </script>
+
+
+    <!-- <script>
+        let a = 3;
+        if (a >= 3){
+            let b = 10; // let声明的b是一个局部变量，局部变量作用范围是从声明开始到块结束
+            console.log(b);
+        }
+        console.log(b);  // 会提示未定义
+    </script> -->
+
+    <script>
+        const PI =3.14;
+        console.log(PI);
+    </script>
+
+</body>
+</html>

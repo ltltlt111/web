@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="">省份：</label>
+    <select id="pro">
+        <option value="-1">请选择</option>
+    </select>
+
+    <label for="">城市：</label>
+    <select id="city">
+        <option value=-1>请选择</option>
+    </select>
+
+    <label for="">区县：</label>
+    <select id="dist">
+        <option value="-1">请选择</option>
+    </select>
+    <script>
+
+        let data = false;
+
+        fetch("https://restapi.amap.com/v3/config/district?key=53d8388c9ef096c4ace768ea052bc508&subdistrict=3")
+            .then(response => response.json())
+            .then(ret => {
+                data = ret.districts[0].districts;
+
+                let optionHtml = "<option value=-1>请选择</option>";
+                // 遍历 data 
+                for (let pro of data) {
+                    optionHtml += `<option value="${pro.adcode}">${pro.name}</option>`
+                }
+                document.querySelector("#pro").innerHTML = optionHtml;
+
+
+            });
+
+        let citys = false;
+        document.querySelector("#pro").addEventListener("change", function () {
+            let value = this.options[this.options.selectedIndex].value;
+            if (data) {
+                let pro = data.find(p => p.adcode == value)
+                citys = pro.districts;
+
+                let optionHtml = "<option value=-1>请选择</option>";
+                for (let city of citys) {
+                    optionHtml += `<option value="${city.adcode}">${city.name}</option>`
+                }
+                document.querySelector("#city").innerHTML = optionHtml;
+                document.querySelector("#dist").innerHTML = "<option>请选择</option>";
+            }
+
+        })
+
+        document.querySelector("#city").addEventListener("change", function () {
+            let value = this.options[this.options.selectedIndex].value;
+
+            if (citys) {
+                let city = citys.find(c=>c.adcode == value)
+                console.log(city);
+                let districts = city["districts"];
+                console.log();
+                let optionHtml = "<option value=-1>请选择</option>";
+                
+                for (var district of districts) {
+                    optionHtml += `<option value="${district.adcode}">${district.name}</option>`;
+                }
+                document.querySelector("#dist").innerHTML = optionHtml;
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

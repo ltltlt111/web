@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        for (let i = 1; i <= 9; i++) {
+            for (let j = 1; j <= i; j++) {
+                    document.write(`${i} * ${j} = ${i * j}` + "&nbsp;&nbsp;");
+            }
+            document.write(`<br>`)
+        }
+    </script>
+
+
+    <script>
+        let a = [];
+        let cocks = 0;
+        while(cocks <= 100){
+            let hens = 0;
+            while(hens <= 100-cocks){
+                chicken = 100 - cocks - hens;
+                if (cocks * 5 + hens * 3 + chicken / 3 === 100){
+                    a.push([cocks,hens,chicken])
+                }
+                hens++;
+            }
+            cocks++;
+        }
+        console.log(`共有${a.length}种情况，分别是：`);
+        console.log(a);
+    </script>
+
+
+    <script>
+        let result_three = []
+        for(let i = 2;i<=100;i++){
+            let isPrime = true;
+            for(let j = 2;j<= i - 1;j++){
+                if(i % j == 0){
+                    isPrime = false;
+                    break
+                }
+            }
+            if (isPrime === true){
+                result_three.push(i)
+            }
+        }
+        console.log(`1-100之间共有${result_three.length}个，分别是：`);
+        console.log(result_three);
+    </script>
+
+    <script>
+        for(let rabbits = 0;rabbits <= 35;rabbits++){
+            if (rabbits * 4 + (35 - rabbits) *  2 === 94){
+                console.log(`共有兔子${rabbits}只,鸡${35-rabbits}只`);
+            }
+        }
+    </script>
+</body>
+</html>

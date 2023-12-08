@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array1 = [1,2,3,4]
+        let array2 = [34,25,3]
+
+        // 将两个数组合并
+        let array3 = array1.concat(array2)
+        console.log(array1,array2,array3);
+
+        // 数组展开运算符：`...`
+        let array4 = [...array1,...array2]
+        console.log(array4);
+
+        // 效果一样
+        array1.push(...array2)
+        console.log(array1);
+    </script>
+</body>
+</html>

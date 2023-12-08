@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <textarea name="" id="" cols="30" rows="10">
+        11111
+    </textarea>
+
+    <textarea name="" id="" cols="30" rows="10">
+        22222
+    </textarea>
+
+
+    <div>
+        <p>666</p>
+        <p>777</p>
+    </div>
+    <!-- jQuery中的触发事件处理
+        1，trigger()：触发指定的事件
+        
+        2，triggerHandler()：触发指定的事件，但不会触发浏览器默认行为和事件冒泡
+        区别：
+            1，trigger会触发选中的所有元素对应的事件
+            2，triggerHandler只会选中第一个元素对应的事件
+            3，triggerHandler不会触发浏览器默认行为和事件冒泡
+            4，trigger触发事件可能会触发冒泡行为
+            5，triggerHandler返回值是事件处理函数的返回值(回调函数没有return就是undefined)，trigger返回值还是jQuery对象
+
+    -->
+    <script>
+        $(function () {
+            $("textarea").on("keydown", function (event) {
+                if (event.keyCode === 13) {
+                    // 阻止默认行为
+                    event.preventDefault();
+                    // 将文本框中输入的内容打印到控制台
+                    console.log($(this).val());
+                }
+            })
+            let event = $.Event("keydown");
+            event.keyCode = 13;
+
+            // 可以在浏览器控制台使用脚本自动按下回车
+            // $("textarea").trigger(event);
+            // $("textarea").triggerHandler(event);
+        })
+
+
+
+        $(function () {
+            $("p").on("click", function (event) {
+                let val = $(this).text();
+                // console.log("-------------",val);
+                return val;
+            })
+            let result1 = $("p").trigger("click");
+            console.log(result1);
+
+            let result = $("p").triggerHandler("click");
+            console.log(result);
+        })
+
+
+
+    </script>
+</body>
+
+</html>

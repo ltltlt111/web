@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            let ptag = document.querySelector("p")
+            console.log(ptag);
+        });
+        // 可以简写为
+
+        $(function () {
+            let ptag = document.querySelector("p")
+            console.log(ptag);
+        });
+
+        $(function () {
+            // 获取所有的p标签
+            let ptag = $("p#test")
+            console.log(ptag);
+        })
+    </script>
+</head>
+
+<body>
+    <!-- 写一个嵌套标签 -->
+
+
+    <!-- 
+        jQuery 特点
+        基于JavaScript语言进行的代码封装，是一个专门用来操作DOM的JS库
+
+        jQuery宗旨：write less, do more(写更少的代码，做更多的事情)
+
+        jQuery库核心对象：`$`本质上就是jQuery对象的的简写
+
+        $(document):将js中的document对象转换为jQuery对象，这样就可以使用jQuery中定义的方法
+        $()可以将任何js对象转换为jQuery对象
+        ready文档事件：需要提供一个回调函数
+            作用：在ready回调函数中编写的代码会在整个DOM的结构(所有标签,不包括css和js)加载完后执行,这样就不用考虑ready写在head还是body后了
+            与window.onload区别：ready可以被绑定多次，但是onload多次绑定会被覆盖，onload是整个DOM网页加载完后执行，所以要比ready慢
+       -->
+
+
+    <!-- 
+        jQuery选择器： 通过css选择器快速找到对应的DOM，返回的还是jQuery对象
+        js中如果id重名只能选择一个，而jQuery可以选择全部
+        $(cssSelector):cssSelector代表一个css选择器
+        选择ID = test 的标签：$("#test")
+        选择class="a"的标签：$(".a")
+
+        常见的选择器：
+        id选择器：#id
+        类选择器：.class
+        标签选择器：tagName
+        属性选择器：[propName],[propName=value],[propName!=value],[propName^=value],[propName$=value],[propName*=value]
+        jQuery还支持不等于的选择器：[propName!=value],选择propName不等于value的所有标签(包括html,body等标签都会被选中)
+        层级选择器：后代选择器：A B 选择A标签下的所有B标签
+        通用选择器：* 选择所有标签
+        群组选择器：A,B 选择A标签和B标签
+        子选择器：A>B 选择A标签的直接子标签B
+        相邻兄弟选择器：A+B 选择A标签的下一个兄弟标签B
+        后续兄弟选择器：A~B 选择A标签后面所有的兄弟标签B
+        过滤选择器：:first 选择第一个标签
+        :last 选择最后一个标签
+        :eq(index) 选择第index个标签
+        :lt(index) 选择index之前的所有标签
+        :gt(index) 选择index之后的所有标签
+
+        jQuery特有选择器：
+        表单选择器：:input 选择所有的表单标签
+        :text 选择所有的文本框
+        :password 选择所有的密码框
+        :radio 选择所有的单选框
+        :checkbox 选择所有的复选框
+        :submit 选择所有的提交按钮
+        :reset 选择所有的重置按钮
+        :button 选择所有的type=button或者标签为button的按钮
+        :image 选择所有的图片按钮
+        :file 选择所有的文件域
+        :checked 选择所有的选中的表单元素
+        :selected 选择所有的选中的option元素
+        :enabled 选择所有的可用的表单元素
+        :even 选择所有索引为偶数的表单元素
+        :odd 选择所有索引为奇数的表单元素
+        :not(selector) 选择所有不符合选择器selector的元素
+        :target 选择当前活动的目标元素
+        内容：
+        :contains(text) 选择所有包含指定文本的元素
+        :empty() 选择所有不包含子元素或者文本的空元素
+        :parent 选择所有含有子元素或者文本的元素
+        :has(selector) 选择所有至少包含一个符合选择器selector的元素的元素
+        :visible 选择所有可见的元素,与:hidden相反
+        :hidden 选择所有不可见的元素且元素不占用空间,例如display:none或者type=hidden或者宽高为0
+
+    -->
+    <p id="test" >测试</p>
+    <p id="test" >测试</p>
+
+
+    <script>
+        console.log($ === jQuery);
+        // 选中所有的p标签
+    </script>
+
+</body>
+
+</html>

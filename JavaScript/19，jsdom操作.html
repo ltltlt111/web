@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/commonfind.js"></script>
+</head>
+<body>
+    <!-- 
+        两个概念：
+        node：节点(元素加文本内容)
+        element：元素(HTML标签)
+     -->
+    <div>
+        <a href=""></a>
+        <b></b>
+        <p class="x" >
+            <a href="http://www.baidu.com">百度</a>
+            <b class="test" > <em>字体加粗</em> </b>
+            <a href="http://www.sina.com">新浪</a>
+        </p>
+        <div>
+            <span>测试数据</span>
+        </div>
+        <a href=""></a>
+    </div>
+
+    <script>
+        // 获取class="x"的标签
+        let ptag = document.querySelector(".x")
+
+        // 自己创建的方法
+        console.log(ptag.parents());
+        console.log(ptag.prevAll());
+        console.log(ptag.nextAll());
+        console.log(ptag.siblings());
+
+
+        ptag.css("color", "green")
+        console.log(ptag.css("color"));
+
+        ptag.css({
+            "color":"yellow",
+            "font-size":"100px"     
+        })
+
+        // // 获取p标签的所有子元素
+        // // children获取所有的子元素而不是后代元素
+        // console.log(ptag.children);
+
+        // // 加上四个空白符
+        // console.log(ptag.childNodes);
+
+        // // 获取p标签的父元素(直接父级元素)
+        // console.log(ptag.parentElement);
+        // console.log(ptag.parentElement.parentElement);
+        // console.log(ptag.parentElement.parentElement.parentElement);
+        // console.log(ptag.parentElement.parentElement.parentElement.parentElement);
+
+        // // 获取p标签的下一个兄弟
+        // // 兄弟且是标签
+        // console.log(ptag.nextElementSibling);
+        // // 可能是文本节点
+        // console.log(ptag.nextSibling);
+
+        // // 上个个兄弟
+        // console.log(ptag.previousElementSibling);
+        // console.log(ptag.previousSibling); 
+
+    </script>
+    
+    <script>    
+    </script>
+</body>
+</html>

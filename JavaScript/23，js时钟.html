@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/commonfind.js"></script>
+</head>
+
+<body>
+    <div id="clock"></div>
+    <script>
+        let clock = document.querySelector("#clock");
+
+        clock.css({
+            width: "300px",
+            height: "300px",
+            background: "red",
+            position: "relative",
+            borderRadius: "50%"
+        });
+
+        // 定义圆心 
+        let pan = document.createElement("div");
+        pan.css({
+            width: "20px",
+            height: "20px",
+            background: "gold",
+            position: "absolute",
+            left: "140px",
+            top: "140px",
+            borderRadius: "50%",
+            zIndex: 999
+        })
+
+        clock.append(pan);
+
+        // 添加 60个刻度
+        for (let i = 0; i < 60; i++) {
+            // 创建一个 span ， 代表一个刻度
+            let kd = document.createElement("span");
+
+            clock.append(kd);
+
+            let w = 6, h = 12;
+            if (i % 15 == 0) {
+                w = 10;
+                h = 18;
+            }
+
+            // 计算 每一个 刻度 在 表盘中的位置
+            let x = Math.sin(i * 6 * Math.PI / 180) * 150 + 147;
+            let y = 150 - Math.cos(i * 6 * Math.PI / 180) * 150;
+
+            if (i % 15 == 0) {
+                x -= 2;
+            }
+            // 移动刻度
+            kd.css({
+                position: "absolute",
+                width: `${w}px`,
+                height: `${h}px`,
+                background: "#000",
+                top: `${y}px`,
+                left: `${x}px`,
+                transformOrigin: "center top",
+                transform: `rotate(${i * 6}deg)`,
+            })
+        }
+
+        // 生成秒针 
+        let secPoint = document.createElement("em");
+        secPoint.className = "sec";
+        clock.append(secPoint);
+        secPoint.css({
+            position: "absolute",
+            width: `4px`,
+            height: `120px`,
+            background: "#fff",
+            top: "30px",
+            left: "148px",
+            transformOrigin: "center bottom",
+        })
+
+        // 生成分针
+        let minPoint = document.createElement("em");
+        minPoint.className = "min";
+        clock.append(minPoint);
+        minPoint.css({
+            position: "absolute",
+            width: `6px`,
+            height: `100px`,
+            background: "#fff",
+            top: "50px",
+            left: "146px",
+            transformOrigin: "center bottom",
+        })
+
+        // 生成时针
+        let hourPoint = document.createElement("em");
+        hourPoint.className = "hour";
+        clock.append(hourPoint);
+        hourPoint.css({
+            position: "absolute",
+            width: `8px`,
+            height: `80px`,
+            background: "#fff",
+            top: "70px",
+            left: "144px",
+            transformOrigin: "center bottom",
+        })
+
+
+
+        function showClock() {
+            // 获取 当前系统时间
+            let date = new Date();
+            let hour = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+            // 将 秒针渲染 sec * 6 度 
+            clock.querySelector(".sec").style.transform = `rotate(${sec * 6}deg)`;
+            clock.querySelector(".min").style.transform = `rotate(${min * 6 + sec * 0.1}deg)`;
+            clock.querySelector(".hour").style.transform = `rotate(${sec/120 + min * 0.5 + hour * 30}deg)`;
+
+        }
+
+        // showClock();
+        // 每间隔 1秒 执行 1 次 
+        setInterval(showClock, 1000);
+
+
+    </script>
+
+</body>
+
+</html>

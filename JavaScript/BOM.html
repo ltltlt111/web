@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 
+         * BOM：浏览器对象模型
+         * window 对象：浏览器窗口
+         * screen：屏幕
+         * navigator：导航
+         * location：位置
+         * history：历史记录
+         * frames：框架
+         * document：文档对象
+         * 
+        */
+
+        // var在script脚本上下文声明的变量会自动成为window的属性
+        var a = 10     // window.a = 10，这两个有差异
+        // 用var声明的a无法用delete删除，使用window.a声明的对象可以使用delete删除
+        // 如果a没声明也不会报错，会返回undefined
+        console.log(window.a);
+
+        // window对象常见方法
+        /** 
+         * 1，btoa(str)：将字符串进行base64编码，不支持中文
+         * 2，atob(str)：将base64编码后的字符串解码
+         * 3，alert(x)：提示框，阻塞网页，只有一个确定按钮
+         * 4，confirm(tips)：确认对话框，包含确定和取消按钮，会阻塞
+         * 5，prompt(tips)：输入对话框，点击确认会返回输入的内容，点击取消返回null
+         * 6，open()：打开一个新的窗口,返回一个新窗口window
+         * 7，setTimeout(fn, time)：设置延迟任务，返回一个句柄，通过clearTimeout停止任务
+         * 8，setInterval(fn,time)：轮询任务，返回一个句柄，通过clearInterval停止任务
+        */
+
+
+        window.open("http://www.baidu.com")
+
+
+        // let text = prompt("输入一句话：")
+        // console.log(text);
+
+
+        // if (confirm("关闭么？")){
+        //     // document.write("不能关闭")
+        //     window.close()
+        // }
+    </script>
+</body>
+</html>

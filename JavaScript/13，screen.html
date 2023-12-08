@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(navigator.userAgent);
+
+        console.log(navigator.appVersion);
+
+        navigator.geolocation.getCurrentPosition((ret) => {
+            // 获取经度
+            let x = ret.coords.longitude;
+            // 获取纬度
+            let y = ret.coords.latitude;
+            console.log(x, y);
+            fetch(`https://restapi.amap.com/v3/geocode/regeo?key=3fea7def95a913231acd346ed439df3d&location=${x},${y}`)
+                .then(response => response.json())
+                .then(ret => {
+                    if (ret.status == 1) {
+                        let data = ret.regeocode.addressComponent;
+                        let c = data.country;
+                        let p = data.province;
+                        let c1 = data.city;
+                        let x = data.township;
+                        console.log(c, p, c1, x);
+                    }
+                })
+        });
+
+
+    </script>
+</body>
+
+</html>

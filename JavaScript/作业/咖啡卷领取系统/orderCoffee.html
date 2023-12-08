@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/index.css" th:href="@{/static/css/index.css}" type="text/css">
+    <script src="./js/qrcode.js" th:src="@{/static/js/qrcode.js}"></script>
+    <title>奇酷</title>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/sysconfig.js"></script>
+    <script src="./js/xx.js"></script>
+</head>
+
+<body ontouchstart="">
+    <header class="header">奇酷-我的咖啡卷</header>
+
+    <!-- 显示 二维码 -->
+    <div class="mode-win">
+        <i class="close">关闭</i>
+        <div class="qrcode"></div>
+    </div>
+
+    <div class="coff-nav">
+        <a id="first" href="javascript:void(0)" class="coff current">待审核</a>
+        <a id="second" href="javascript:void(0)" class="coff">已审核</a>
+        <a id="third" href="javascript:void(0)" class="coff">已使用</a>
+    </div>
+
+    <div class="container-list">
+        <!-- <span>暂无数据</span> -->
+        <!-- forbidden 样式 应用于 待审核 和 已使用的 优惠卷 -->
+
+
+
+
+    </div>
+    <footer class="footer">
+        <a href="./applyCoffee.html" class="apply">申请咖啡卷</a>
+        <a href="./orderCoffee.html" class="juan active">我的咖啡卷</a>
+    </footer>
+
+    <aside class="backtop"></aside>
+
+    <script>
+        let coffeeList = document.querySelectorAll(".credit > a");
+
+        // 动态绑定事件
+        Array.from(coffeeList).forEach(coffeeA => {
+            coffeeA.addEventListener("click", function (event) {
+                // 获取 咖啡卷的 ID
+                let cid = this.dataset.id;
+                // 获取网络地址前缀
+                let qrcodeUrlPrefix = "[[ ${qrcodeUrlPrefix} ]]"
+                // 生成网络地址
+                document.querySelector(".mode-win").style.display = "block";
+                new QRCode(document.querySelector(".qrcode"), qrcodeUrlPrefix + "/qrcode?cid=" + cid)
+            })
+        })
+
+        document.querySelector(".mode-win .close").addEventListener("click", function (event) {
+            document.querySelector(".mode-win").style.display = "none";
+            document.querySelector(".qrcode").innerHTML = "";
+        })
+
+        let backTop = document.querySelector(".backtop")
+        // 给 window  添加 一个 滚动事件 
+        window.addEventListener("scroll", function (event) {
+            // 获取 滚动条的 垂直 隐去的偏移量 
+            if (this.pageYOffset >= 500) {
+                backTop.style.display = "block";
+            } else if (this.pageYOffset < 500) {
+                backTop.style.display = "none";
+            }
+        });
+
+        // 给 backTop 绑定单击事件 
+        backTop.addEventListener("click", function (event) {
+            // scrollTop 设置 它距离顶部位置
+            window.scrollTo({ behavior: 'smooth', top: 0 });
+        });
+
+
+        function getFirst() {
+            API.getAllMyCoffee(1).then(ret => {
+                console.log(ret);
+                if (ret.data.length !== 0) {
+                    let readyVerifys = ret.data;
+                    let coffeeList = "";
+                    for (let readyVerify of readyVerifys) {
+                        coffeeList += `<div class="credit forbidden"><a href="javascript:void(0)" data-id="1"><div class="left"><dl><dt>咖啡卷</dt><!-- yes 主要应用于 待审核， no 应用于 已使用, 已审核无该样式 --><dd class="yes">待审核</dd></dl></div><div class="right"></div></a></div>`
+                    }
+                    document.querySelector(".container-list").innerHTML = coffeeList;
+                } else {
+                    document.querySelector(".container-list").innerHTML = `<span>暂无数据</span>`;
+                };
+
+            })
+        }
+        getFirst();
+
+
+        let titles = document.querySelector(".coff-nav")
+
+
+
+        titles.addEventListener("click", function (event) {
+            let first = document.querySelector("#first");
+            let second = document.querySelector("#second");
+            let third = document.querySelector("#third");
+            if (event.target == first) {
+                second.classList.remove("current")
+                third.classList.remove("current")
+                first.classList.add("current")
+                getFirst();
+            };
+
+            if (event.target == second) {
+                second.classList.add("current")
+                first.classList.remove("current")
+                third.classList.remove("current")
+                API.getAllMyCoffee(2).then(ret => {
+                    console.log(ret);
+                    if (ret.data.length !== 0) {
+                        let readyVerifys = ret.data;
+                        console.log(readyVerifys);
+                        let coffeeList = "";
+                        for (let readyVerify of readyVerifys) {
+                            coffeeList += `<div class="credit"><a href="javascript:void(0)" data-id="2"><div class="left"><dl><dt>咖啡卷</dt><dd class="no">${readyVerify.applyTime} ~ ${readyVerify.effectTime}</dd></dl></div><div class="right"></div></a></div>`
+                        }
+                        document.querySelector(".container-list").innerHTML = coffeeList;
+                    } else {
+                        document.querySelector(".container-list").innerHTML = `<span>暂无数据</span>`;
+
+                    };
+                })
+            }
+
+            if (event.target == third) {
+                third.classList.add("current")
+                first.classList.remove("current")
+                second.classList.remove("current")
+                API.getAllMyCoffee(3).then(ret => {
+                    console.log(ret);
+                    if (ret.data.length !== 0) {
+                        let readyVerifys = ret.data;
+                        console.log(readyVerifys);
+                        let coffeeList = "";
+                        for (let readyVerify of readyVerifys) {
+                            coffeeList += `<div class="credit forbidden"><a href="javascript:void(0)" data-id="2"><div class="left"><dl><dt>咖啡卷</dt><dd class="no">${readyVerify.applyTime} ~ ${readyVerify.effectTime}</dd></dl></div><div class="right"></div></a></div>`
+                        }
+                        document.querySelector(".container-list").innerHTML = coffeeList;
+                    } else {
+                        document.querySelector(".container-list").innerHTML = `<span>暂无数据</span>`;
+
+                    };
+                })
+            }
+        })
+
+
+        let credits = document.querySelectorAll(".credits");
+        console.log(credits);
+    </script>
+
+</body>
+
+</html>

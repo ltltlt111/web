@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input xxx="ttt" class="a b c" type="text" name="username" value="admin" data-a="111" data-b="222">
+
+    <script>
+        let tag = document.querySelector("input")
+
+        // 获取type，name和value属性(大部分属性都可以通过`.`获取)
+        console.log(tag.type, tag.name, tag.value);
+        tag.style.backgroundColor = "#f00";
+        tag.style.width = "400px";
+        tag.style.height = "200px"
+
+        // 获取类名(不好用)
+        console.log(tag.className);
+        // 修改class属性值会覆盖
+        tag.className = "xxx";
+
+        // 如果有b样式则去掉，没有则添加
+        if (tag.classList.contains("b")) {
+            tag.classList.remove("b")
+        } else {
+            tag.classList.add("b")
+        }
+
+        console.log(tag.className);
+
+
+        // "data-xxx"开头的属性
+        // data-<field>    dataset.field ：获取/修改值
+        // 如果不符合命名规范用["field"]获取和修改
+        // 获取所有data-开头的属性
+        console.log(tag.dataset.a);
+        console.log(tag.dataset.a);
+
+
+
+        // 自定义属性
+        // 最万能的获取指定属性的值
+        // getAttribute：获取指定属性的值
+        // setAttribute：修改/添加属性和值
+        // removeAttribute：移除指定属性
+        console.log(tag.getAttribute());
+
+    </script>
+</body>
+
+</html>

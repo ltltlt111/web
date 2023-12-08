@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./css/index.css" th:href="@{/static/css/index.css}" type="text/css">
+	<title>奇酷</title>
+	<script src="./js/xx.js"></script>
+	<script src="./js/asyn-request.js"></script>
+	<script src="./js/axios.min.js"></script>
+	<script src="./js/sysconfig.js"></script>
+</head>
+
+<body ontouchstart="">
+	<header class="header">奇酷-注册</header>
+
+	<form>
+		<div class="container">
+
+			<div class="row">
+				<label>手机号:</label>
+				<input type="text" placeholder="请输入手机号" name="tel" prop="tel" required>
+			</div>
+
+			<div class="row">
+				<label>姓名:</label>
+				<input type="text" placeholder="请输入您的姓名" prop="username" name="name" required>
+			</div>
+
+			<div class="row">
+				<label>班级:</label>
+				<input type="text" placeholder="请输入您的班级" prop="clsName" name="className" required>
+			</div>
+
+			<div class="row">
+				<label>密码:</label>
+				<input type="password" placeholder="请输入密码" prop="password" name="password" required>
+			</div>
+
+			<div class="row">
+				<label>确认密码:</label>
+				<input type="password" placeholder="请再次输入密码" prop="requiredPwd" required>
+			</div>
+
+			<p class="info" prop="onlyKuang">
+				<label for="agree-1"><input type="radio" name="role" value="1" checked id="agree-1">学生</label>
+				<label for="agree-2"><input type="radio" name="role" value="2" id="agree-2">教师</label>
+			</p>
+
+			<button class="btn">注册</button>
+
+			<p class="info" style="border-bottom: none">
+				<a class="link ft" href="./login.html" th:href="@{/login}">已有账号、立即登录</a>
+			</p>
+		</div>
+	</form>
+
+	<script>
+		(function () {
+			let form = document.querySelector("form");
+			form.rules = {
+				tel: [
+					{
+						trigger: "blur",
+						required:true,
+						message:"手机号不允许为空",
+					},
+					{
+						pattern:/^1[3-9]\d{9}$/,
+						message:"手机号格式不正确"
+					}
+				],
+				username: [
+					{
+						pattern: /^[\u4e00-\u9fff]+?$/,
+						message: "姓名必须为中文"
+
+					},
+					{
+						minlength: 2,
+						message: "长度为2~5范围内"
+					},
+					{
+						maxlength: 5,
+						message: "长度为2~5范围内"
+					},
+				],
+				clsName: [
+					{
+						pattern: /^[a-z]+?\d{4}$/i,
+						message: "班级名不合法"
+					}
+				],
+				password: [
+					{
+						minlength: 6,
+						message: "长度过短！长度应在6~20范围内"
+					},
+					{
+						maxlength: 20,
+						message: "长度过长！长度应在6~20范围内"
+					},
+				],
+				requiredPwd: [
+					{
+						validator: function (val) {
+							return document.querySelector("[prop=password]").value == val
+						},
+						message: "两次输入的密码不一致"
+					}
+				],
+				onlyKuang: [
+					{
+						required: true,
+						message: "必选"
+					}
+				],
+
+			}
+			function callback(data) {
+				console.log(data);
+				API.register(data).then(data => {
+					if(data.status){
+						location.href="./login.html"
+					}
+				})
+
+			}
+			form.validate(callback)
+		})()
+
+
+
+	</script>
+</body>
+
+</html>

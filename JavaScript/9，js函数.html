@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sum(a,b){
+            // js中的函数不支持关键字参数
+            // 如果没有return返回undefined
+            // 只能返回一个值，参数可以设置默认值，默认值在传入值为undefined时起作用
+            // 没有必传参数
+            // 支持不定参数...(必定是一个数组，在参数最后)
+            return a + b;
+        }
+
+        console.log(sum(1,2));
+    </script>
+</body>
+</html>

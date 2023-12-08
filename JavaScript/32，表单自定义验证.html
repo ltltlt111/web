@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/form_validation.js"></script>
+</head>
+<body>
+    <form action="" autocomplete="off">
+        <div>
+            <lable>用户名</lable>
+            <input required type="text" name="username" prop="username">
+            <em>用户名长度为6-20为</em>
+        </div>
+
+        <div>
+            <lable>密码</lable>
+            <input type="password" name="password" >
+        </div>
+
+        <!-- <div>
+            <lable>确认密码</lable>
+            <input type="password" name="">
+        </div> -->
+
+        <div>
+            <lable>手机号</lable>
+            <input type="text" name="tel">
+        </div>
+
+        <div>
+            <input type="button" value="提交">
+        </div>
+    </form>
+    <script>
+        // // sumbit按钮会自动提交表单且支持表单自动验证
+
+        // // 普通按钮/其他元素单击事件绑定
+        // document.querySelector("[type=button]").addEventListener("click",function(event){
+        //     // 1，获取form表单对象
+        //     let f = this.parentNode.parentNode;
+        //     // 2，搬砖式方法来校验表单内容
+        //     // 获取用户名
+        //     let userInp = f.username.value;
+        //     if (userInp == ""){
+        //         alert("用户名不能为空");
+        //         return ;
+        //     }
+        //     if (!/^\w+$/.test(userInp)){
+        //         alert("用户名格式不正确");
+        //         return ;
+        //     }
+
+
+        //     // 获取密码
+        //     let passwordInp = f.password.value;
+        //     if (passwordInp == ""){
+        //         alert("密码不能为空");
+        //         return ;
+        //     }
+        //     if (/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[__]{0,})[0-9a-zA-Z__]{8,20}$/.test(passwordInp)){
+        //         alert("密码格式不正确");
+        //         return ;
+        //     }
+
+
+        //     // 获取手机号
+        //     let telInp = f.tel.value;
+        //     if (telInp == ""){
+        //         alert("手机号不能为空");
+        //         return ;
+        //     }
+        //     if (!/^1[3456789]\d{9}$/.test(telInp)){
+        //         alert("手机号格式不正确");
+        //         return ;
+        //     }
+        //     // f.checkValidity();
+        //     // 3，调用form表单的submit提交表单
+        //     // f.submit();
+        // })
+    </script>
+
+    <script>
+        // 获取form表单对象
+        let formTag = document.querySelector("form");
+
+        formTag.rules = {
+            username:[
+                {
+                    trigger:"blur",
+                    pattern:/^$[a-z0-9]$/i,
+                    message:"用户名格式错误",
+                },
+            ],
+            password:[
+                {
+                    minlength:6,
+                    maxlength:20,
+                    message:"密码长度应在6-20位"
+                }
+            ]
+        }
+
+        // 用户调用表单中的validate(fn)方法即可自动完成表单校验，且validate支持传入一个回调函数用来获取校验成功后的数据
+        formTag.validate(function(data){
+            // 获取校验成功后表单中的数据
+            console.log(data);
+        })
+    </script>
+</body>
+</html>

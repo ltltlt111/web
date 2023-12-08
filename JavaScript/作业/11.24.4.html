@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./js/jquery-3.7.1.min.js"></script>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <label>
+    <input type="checkbox" id="selectAll"> <span>全选</span>
+  </label>
+
+  <label><input type="checkbox" class="hobbybox"> 游泳</label>
+  <label><input type="checkbox" class="hobbybox"> 爬山</label>
+  <label><input type="checkbox" class="hobbybox"> 唱歌</label>
+  <label><input type="checkbox" class="hobbybox"> 跳舞</label>
+  <label><input type="checkbox" class="hobbybox"> 玩游戏</label>
+  <label><input type="checkbox" class="hobbybox"> 看电影</label>
+
+  <script>
+    $(document).ready(function() {
+      $('#selectAll').on('change', function() {
+        let isChecked = $(this).prop('checked');
+
+        $('.hobbybox').prop('checked', isChecked);
+
+        if (isChecked) {
+          $(this).next('span').text('取消');
+        } else {
+          $(this).next('span').text('全选');
+        }
+      });
+
+      $('.hobbybox').on('change', function() {
+        if ($('.hobbybox:checked').length === $('.hobbybox').length) {
+          $('#selectAll').prop('checked', true);
+          $('#selectAll').next('span').text('取消');
+        } else {
+          $('#selectAll').prop('checked', false);
+          $('#selectAll').next('span').text('全选');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

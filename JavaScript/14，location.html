@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(location.href);
+        // location.href("https://www.baidu.com")
+
+
+        console.log(location.protocol); // http:或者https:
+
+        // 获取主机名
+        console.log(location.hostname);
+        // 域名加端口
+        console.log(location.host);
+        // 端口
+        console.log(location.port);
+        // 请求地址(端口号后面到请求参数前)
+        console.log(location.pathname);
+        // 请求参数
+        console.log(location.search);
+        // 获取锚点
+        console.log(location.hash);
+
+        // 跳转，将原网址加到历史记录中
+        // location.assign("https://www.baidu.com")
+        // 不会将原网址添加到历史记录中
+        // location.replace("https://www.baidu.com")
+
+        // 和location一起配合处理search参数
+        let sp = new URLSearchParams(location.search)
+        let data = [...sp]
+
+        // 得到a的第一个值
+        console.log(sp.get("a", "aaaaaaaaaaaaaaa"));
+        // 得到a的所有值
+        console.log(sp.getAll("a",));
+        console.log(data);
+    </script>
+</body>
+</html>

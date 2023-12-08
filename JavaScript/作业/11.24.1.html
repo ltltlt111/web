@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .num_cal {
+            display: flex;
+        }
+
+        .num_cal .sub,
+        .add {
+            width: 50px;
+            height: 50px;
+            font-size: 40px;
+        }
+
+        .num_cal .num {
+            font-size: 40px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="num_cal">
+        <button class="sub">-</button>
+        <p class="num"></p>
+        <button class="add">+</button>
+    </div>
+
+    <script>
+        $(function () {
+            let num = 1;
+            function updateButton() {
+                if (num <= 1) {
+                    $(".sub").prop("disabled", true);
+                } else {
+                    $(".sub").prop("disabled", false);
+                }
+                // if (num >= 100) {  
+                //     $(".add").prop("disabled", true);  
+                // } else {  
+                //     $(".add").prop("disabled", false);  
+                // }  
+            }
+            $(".num_cal .num").text(num);
+            $(".sub").click(function () {
+                if (num <= 1) {
+                    alert('不能再减少了');
+                    return;
+                }
+                num--;
+                $(".num_cal .num").text(num)
+                updateButton()
+            })
+            $(".add").click(function () {
+                num++;
+                $(".num_cal .num").text(num)
+                updateButton()
+            })
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

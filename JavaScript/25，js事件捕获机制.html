@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        <a>测试</a>
+    </p>
+
+    <div>
+        <input type="checkbox" name="" id="" >
+        <input type="checkbox" name="" id="" >
+        <input type="checkbox" name="" id="" >
+        <input type="checkbox" name="" id="" >
+        <input type="checkbox" name="" id="" >
+    </div>
+
+    <div class="haha" >
+        <input type="text">
+        <button>添加数据</button>
+        <!-- <div class="data">
+            <label for="">姓名</label>
+            <span>张三</span>
+            <a>删除</a>
+        </div> -->
+    </div>
+    <!-- 
+        事件捕获机制：
+            当父元素和子元素同时绑定了事件且触发子元素事件的时候同时触发了父元素对应的事件
+            事件冒泡(js默认采用的机制)：
+                先执行子元素事件，再执行父元素事件，事件由内向外扩散
+        
+            事件捕获：
+                先执行父元素事件，再执行子元素事件，事件由外向里蔓延
+
+            
+            如果想要实现事件捕获行为，那么在父元素绑定事件的时候，将参数设置为true
+
+        
+        
+        事件委托机制：
+            将事件委托给父元素，通过event.target获取真正触发事件的源对象
+
+            使用场景：
+                1，同时给多个子元素绑定相同的事件，减少事件绑定的次数
+                2，给未来元素绑定事件
+    -->
+
+
+    <script>
+        document.querySelector("p").addEventListener("click", function (event) {
+            console.log(this);
+        })
+
+        document.querySelector("p > a").addEventListener("click", function (event) {
+            console.log(this);
+        })
+    </script>
+
+
+    <script>
+        // 给div绑定change事件
+        document.querySelector("div").addEventListener("change", function(event){
+            console.log(this);
+            console.log(event.target);  // event.target可以获取触发事件的源对象
+        })
+    </script>
+
+
+    <script>
+        document.querySelector("button").addEventListener("click",function(event){
+            // 获取输入框
+            let inp = this.previousElementSibling;
+            // 获取输入框内容
+            let val = inp.value;
+
+            if(val == ""){
+                alert("请输入内容");
+                return;
+            }
+
+            // 生成一个div
+            let div = document.createElement("div");
+            div.className = "data";
+            div.innerHTML = `<label for="">姓名:</label><span>${val}</span><a  class="del">删除</a>`
+            this.after(div);
+        })
+
+        document.querySelector(".haha").addEventListener("click",function(event){
+            if (event.target.className == "del"){
+                if (confirm("确定删除吗")){
+                    event.target.parentNode.remove()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

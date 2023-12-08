@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.js"></script>
+    <script src="./js/axios.js"></script>
+</head>
+
+<body>
+    <label for="">省份：</label>
+    <select id="pro">
+        <option value="-1">请选择</option>
+    </select>
+
+    <label for="">城市：</label>
+    <select id="city">
+        <option value="-1">请选择</option>
+    </select>
+
+    <script>
+
+        function getCities(provinceCode) {
+            console.log(provinceCode);
+            // 清空城市下拉框
+            $("#city").html('<option value="-1">请选择</option>');
+
+            // 根据选择的省份代码获取城市
+            axios.get(`https://restapi.amap.com/v3/config/district?key=53d8388c9ef096c4ace768ea052bc508&subdistrict=2&keywords=${provinceCode}`)
+                .then(ret => {
+                    let cities = ret.data.districts[0].districts;
+                    console.log(cities);
+                    if (cities && cities.length > 0) {
+                        let optionHtml = "<option value='-1'>请选择</option>";
+                        for (let city of cities) {
+                            optionHtml += `<option value="${city.adcode}">${city.name}</option>`;
+                        }
+                        $("#city").html(optionHtml);
+                    }
+                })
+                .catch(error => {
+                    console.error("获取城市失败:", error);
+                });
+        }
+
+        axios.get("https://restapi.amap.com/v3/config/district?key=53d8388c9ef096c4ace768ea052bc508&subdistrict=2")
+            .then(ret => {
+                let provinces = ret.data.districts[0].districts;
+                let optionHtml = "<option value='-1'>请选择</option>";
+
+                for (let province of provinces) {
+                    optionHtml += `<option value="${province.adcode}">${province.name}</option>`;
+                }
+                $("#pro").html(optionHtml);
+
+                $("#pro").change(function () {
+                    let selectedProvinceCode = $(this).val();
+                    // 根据选择的省份调用函数来获取城市
+                    getCities(selectedProvinceCode);
+                });
+            })
+            .catch(error => {
+                console.error("获取省份失败:", error);
+            });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #backToTopButton {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        #backToTopButton:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>回到顶部按钮示例</h2>
+
+    <button onclick="goToTop()" id="backToTopButton">回到顶部</button>
+
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+    <div style="height: 1000px">
+        <p>你好</p>
+    </div>
+
+
+    <script>
+        // 获取“回到顶部”按钮元素  
+        var backToTopButton = document.getElementById("backToTopButton");
+
+        // 监听滚动事件  
+        window.addEventListener("scroll", function () {
+            // 检查是否滚动超过一整页  
+            if (window.pageYOffset > 1000) {
+                // 显示“回到顶部”按钮  
+                backToTopButton.style.display = "block";
+            } else {
+                // 隐藏“回到顶部”按钮  
+                backToTopButton.style.display = "none";
+            }
+        });
+        // 实现回到顶部功能  
+        function goToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'  // 平滑滚动效果  
+            });
+        }  
+    </script>
+
+</body>
+</html>

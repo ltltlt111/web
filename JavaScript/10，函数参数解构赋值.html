@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // js中无法对null和undefined进行解构赋值
+        function login({username,password,rememberme} = {password:"hahha"}){
+            console.log(username,password,rememberme);
+        }
+        login()                                   
+        login({})                                 
+        login({username:'admin',password:123456})
+        
+    
+    
+    </script>
+</body>
+</html>

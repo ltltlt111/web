@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时示例</title>
+    <style>
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="countdown">05:00</div>
+    <button onclick="startCountdown()">开始</button>
+    <button onclick="pauseCountdown()">暂停</button>
+    <button onclick="stopCountdown()">结束</button>
+
+    <script>
+        var countdownElement = document.getElementById("countdown");
+        var countdownInterval;
+
+        function startCountdown() {
+            // 如果内容为 00:00，修改内容为 05:00 然后1秒后开始倒计时
+            if (countdownElement.innerText === "00:00") {
+                countdownElement.innerText = "05:00";
+                setTimeout(function () {
+                    startCountdownTimer();
+                }, 1000);
+            } else {
+                startCountdownTimer();
+            }
+        }
+
+        function startCountdownTimer() {
+            // 开始倒计时
+            countdownInterval = setInterval(function () {
+                var time = countdownElement.innerText.split(":");
+                var minutes = parseInt(time[0]);
+                var seconds = parseInt(time[1]);
+
+                if (minutes === 0 && seconds === 0) {
+                    clearInterval(countdownInterval);
+                    alert("倒计时结束！");
+                } else {
+                    if (seconds === 0) {
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        seconds--;
+                    }
+
+                    countdownElement.innerText = formatTime(minutes) + ":" + formatTime(seconds);
+                }
+            }, 1000);
+        }
+
+        function pauseCountdown() {
+            // 暂停倒计时
+            clearInterval(countdownInterval);
+        }
+
+        function stopCountdown() {
+            // 停止倒计时并强制更改为 00:00
+            clearInterval(countdownInterval);
+            countdownElement.innerText = "00:00";
+        }
+
+        function formatTime(time) {
+            // 格式化时间，确保单数数字前面有0
+            return time < 10 ? "0" + time : time;
+        }
+    </script>
+
+</body>
+
+</html>

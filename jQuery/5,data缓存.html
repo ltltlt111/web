@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <!-- 
+        jQuery中的data缓存属性
+        data(key, value)：添加缓存属性
+        data(key)：获取缓存属性
+        removeData(key)：删除缓存属性
+     -->
+
+
+    <div class="app">
+        <a href="">大大大大</a>
+    </div>
+    <div class="app">
+        <a href="">大大大大大</a>
+    </div>
+
+    <button>点击这里</button>
+
+
+    <script>
+        // 选中button按钮，添加一个缓存属性代表单击次数是否为奇数
+        // 操作标签属性永远是字符串类型，所以下面代码会报错
+        // $("button").on("click", function(event){
+        //     // this是js对象，所有需要转为jQuery对象
+        //     // ?? 代表如果没有值就返回后面的默认值(在低版本浏览器中兼容性很差)
+        //     let val = $(this).attr("click");
+        //     val = val !=null ? val : "false";
+        //     if(val == "false"){
+        //         $(this).attr("click", "false");
+        //     }else{
+        //         $(this).attr("click", "true");
+        //     }
+        // })
+
+        $("button").on("click", function(event){
+            let val = $(this).data("click");
+            if(val){
+                $(this).data("click", false);
+                console.log(val, typeof val);
+            }else{
+                $(this).data("click", true);
+                console.log(val, typeof val);
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <script>
+        $.ajax({
+            url: "https://www.httpbin.org/post",
+            method: "post",
+            success: function (data) {
+                var jsonData = JSON.stringify(data);
+                var pre = document.createElement('pre');
+                pre.textContent = jsonData;
+                document.body.appendChild(pre);
+            }
+        })
+    </script>
+</body>
+
+</html>

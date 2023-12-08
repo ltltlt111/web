@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select name="" id="pro">
+        <option value="1">云南省</option>
+        <option value="2">河南省</option>
+        <option value="3">四川省</option>
+        <option value="4">山西省</option>
+
+        <!-- 
+            获取下拉列表中选中的内容
+         -->
+    </select>
+
+    <script>
+        // 给下拉列表绑定change事件
+        // 常规做法
+        document.querySelector("#pro").addEventListener("change", function(){
+            // 在事件绑定中的this代表触发事件的元素
+            // 获取下拉列表下的所有元素
+            // console.log(this.children);
+            let option = false
+            for (let child of this.children){
+                if(child.selected){
+                    opt = child;
+                    break;
+                }
+            }
+            if (opt){
+                console.log(opt.value,opt.innerText);
+            }
+        })
+
+
+    </script>
+    <script>
+        // 使用options属性属性
+        document.querySelector("#pro").addEventListener("change",function(){
+            console.log(this.options);
+            let opt = this.options[this.options.selectedIndex];
+            console.log(opt.value,opt.innerText);
+        })
+    </script>
+    
+</body>
+</html>

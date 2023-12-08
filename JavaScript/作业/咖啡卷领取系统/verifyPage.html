@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/index.css" th:href="@{/static/css/index.css}" type="text/css">
+  <title>奇酷</title>
+  <script src="./js/xx.js"></script>
+  <script src="./js/axios.min.js"></script>
+  <script src="./js/sysconfig.js"></script>
+</head>
+
+<body ontouchstart="">
+  <header class="header">奇酷-咖啡卷审核</header>
+
+  <div class="container">
+    
+
+  </div>
+  <script>
+
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let cid = urlParams.get("cid")
+    console.log(cid);
+    API.getCoffeeApplyDetail(cid).then(ret => {
+      let data = ret.data;
+      let applyDisplay = "";
+      applyDisplay += `<p class="info"><label>申请人</label><span>${data.name}</span></p><p class="info"><label>申请时间</label><span>${data.createTime}</span></p><p class="info reason"><label>申请原因：</label><em class="content">${data.reason}</em></p><p class="info"><label for="agree-1"><input type="radio" name="agree" value="2" checked id="agree-1">同意</label><label for="agree-2"><input type="radio" name="agree" value="0" id="agree-2">不同意</label></p><button class="btn">确认保存</button>`;
+      document.querySelector(".container").innerHTML = applyDisplay;
+
+      let submitButton = document.querySelector(".btn");
+      submitButton.addEventListener("click", function () {
+        let agree = document.querySelector("input[name='agree']:checked").value;
+
+        let params = {
+          "agree": agree,
+          "cid": cid
+        }
+        API.vertifyCoffee(params).then(ret => {
+          if (ret.status) {
+            alert("提交成功！")
+            location.href = "./verifyCoffee.html";
+          } else {
+            alert(ret.message)
+            location.href = "./verifyCoffee.html";
+
+          }
+        })
+      })
+
+    })
+
+
+
+  </script>
+</body>
+
+</html>

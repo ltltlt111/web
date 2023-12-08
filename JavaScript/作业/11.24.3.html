@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <span>网络地址</span>
+    <input type="text" id="urlInput" value="http://127.0.0.1:5500/JavaScript/11.24.3.html?name=lt&password=123456#bash" placeholder="网络地址">
+    <br>
+    <span>协议</span>
+    <input type="text" id="protocolInput" placeholder="协议">
+    <br>
+    <span>域名</span>
+    <input type="text" id="domainInput" placeholder="域名">
+    <br>
+
+    <span>端口</span>
+    <input type="text" id="portInput" placeholder="端口">
+    <br>
+
+    <span>请求地址</span>
+    <input type="text" id="pathInput" placeholder="请求地址">
+    <br>
+
+    <span>请求参数</span>
+    <input type="text" id="queryInput" placeholder="请求参数">
+    <br>
+
+    <span>锚点</span>
+    <input type="text" id="anchorInput" placeholder="锚点">
+    <br>
+
+    <button id="splitButton">拆分地址</button>
+    <br>
+
+    <button id="joinButton">拼接地址</button>
+    <br>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#splitButton').on('click', function () {
+                let url = $('#urlInput').val();
+
+                let urlObject = new URL(url);
+
+                $('#protocolInput').val(urlObject.protocol);
+                $('#domainInput').val(urlObject.hostname);
+                $('#portInput').val(urlObject.port);
+                $('#pathInput').val(urlObject.pathname);
+                $('#queryInput').val(urlObject.search);
+                $('#anchorInput').val(urlObject.hash);
+            });
+
+            $('#joinButton').on('click', function () {
+                let url = new URL($('#urlInput').val());
+                url.protocol = $('#protocolInput').val();
+                url.hostname = $('#domainInput').val();
+                url.port = $('#portInput').val();
+                url.pathname = $('#pathInput').val();
+                url.search = $('#queryInput').val();
+                url.hash = $('#anchorInput').val();
+
+                $('#urlInput').val(url.href);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

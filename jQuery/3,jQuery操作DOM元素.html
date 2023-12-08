@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <div class="app"><a href=""></a>13242425334</div>
+
+    <div class="app"><a href=""></a>13242435332</div>
+
+
+    <input type="text">
+
+    <input type="text">
+
+
+
+
+    <!-- 
+    get()：获取选择器匹配到的元素，以数组形式返回，数组中为js中的DOM对象
+    get(index)：获取选择器匹配到的元素,返回DOM对象
+
+    text()：获取选择器选中的元素标签体中的文本内容，也可以修改（可以获取多个元素的文本内容并拼接为一个）
+    html()：获取选择器选中的元素标签体中的html超文本内容，也可以修改（只可以获取选择器选中的第一个元素的标签体内容）
+    text(val/fn)：修改选中的所有标签文本内容
+    html(val/fn)：修改选中的所有标签超文本内容
+    val(text/fn)：获取或修改表单元素的value
+    
+ -->
+
+    <!-- 
+    index()：选择器选中的第一个元素在同级元素中的索引位置
+    x.index(selector)：选择器选中的第一个元素在selector选择器选中的元素中的索引位置
+    x.index(element)：选择器选中的第一个元素在element元素中的索引位置
+    
+    -->
+
+    <script>
+
+    </script>
+    <script>
+        // 两种类型对象相互转换
+        $(function () {
+            // 获取ID为app的div标签
+            let divTag = $('div.app');
+            console.log(divTag.get());
+            console.log(divTag.get(0), divTag[0]);
+            let app = document.querySelector(".app")
+            // console.log(app === divTag.get(0));
+            // $(app)  // 自动转为jQuery对象
+            console.log(divTag.text());
+            console.log(divTag.html());
+
+            // divTag.text(function(index, content){
+            //     let tel = content.trim();
+            //     return tel.replace(/^(1[3-9]\d)\d{4}(\d{4})/, () => RegExp.$1 + '****' + RegExp.$2);
+            // })
+
+            // divTag.html(function (index, content) {
+            //     if (index === 0) {
+            //         return 123;
+            //     } else {
+            //         return 456;
+            //     }
+            // });
+
+            let tels = divTag.text().trim().split(/\s+/);
+            console.log(divTag.text());
+
+        })
+
+    </script>
+</body>
+
+</html>

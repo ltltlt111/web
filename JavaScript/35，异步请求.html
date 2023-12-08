@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * JS 采用单线程实现所以JS默认执行任务的方式是同步的
+         * 但是js现在是支持异步编程的
+         * 异步的最大作用就是页面的局部刷新
+         * 
+         * JS实现异步请求的方式：
+         * 1，原生JS实现异步请求(掌握)
+         *      一个核心对象，三个方法，四个属性
+         * 
+         * 2，ES6中的fetch实现异步请求
+         * 
+         * 3，第三方js库，例如jQuery中的ajax，axios等
+         * 
+         * 
+         * 
+         * 异步请求核心对象：XMLHttpRequset
+         * 
+        */
+
+
+        // 元素
+        // 1，创建异步请求核心XMLHttpRequest对象
+        let xhr = new XMLHttpRequest();
+
+        // 2，调用open方法传入网址建立与服务器的链接通道
+        // open方法需要两个参数：第一个参数代表请求方式(主要有GET,POST)，第二个参数代表请求地址
+        // xhr.open("GET", "https://restapi.amap.com/v3/config/district?key=53d8388c9ef096c4ace768ea052bc508&subdistrict=1")
+        xhr.open("get", "https://www.httpbin.org/get")
+
+        // 3，调用setRequestHeader 设置请求头(该步骤不是必须的)设置键值对形式，大部分请求头不允许修改.
+        // xhr.setRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0")
+        // 4，调用send()方法发送请求信息到服务器
+        // send中支持传入参数，格式为 key=value&key=value ,没有参数可以传入none或者不传
+        xhr.send("username=cstg&key=value");
+
+        // 5，调用onreadystatechange属性用来监听客户端和服务端之间的状态改变，该属性的值是一个回调函数
+        xhr.onreadystatechange = function () {
+
+            // 6，使用readyStat属性监听服务器与客户端状态，4代表服务器已经相应了属性
+            /** readyStat属性有五个值
+             * 0：XML核心对象创建前的状态
+             * 1：已经调用了open()函数后的状态  客户端与服务端已经建立连接
+             * 2：发送请求到服务器
+             * 3：服务端正在处理数据或数据已经处理完成，但是未向客户端发送数据
+             * 4：服务器已经正常向客户端发送完数据
+             */
+            if (xhr.readyState === 4) {
+                // 7，使用status获取状态码
+                /**
+                 * 2xx：成功
+                 *      200：请求成功
+                 *      201：添加数据成功
+                 *      204：删除成功
+                 * 
+                 * 3xx:
+                 *      301：永久重定向
+                 *      302：临时重定向
+                 *      304：服务器未更改(常见缓存类)
+                 * 
+                 * 4xx:
+                 *      400：坏的请求(请求参数不正常)
+                 *      401：未认证
+                 *      403：权限不够
+                 *      404：页面找不到
+                 *      405：请求方式不允许
+                 *      406：请求媒体不正确
+                 * 
+                 * 5xx:
+                 *      500：服务器异常
+                 *      502：网关错误(下游服务器出现异常)
+                 * 
+                 * 
+                */
+                if (xhr.status == 200) {
+                    // 使用responseText属性获取服务器响应数据
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            }
+        }
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

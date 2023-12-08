@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 匿名函数
+        // let sum = function(a,b){
+        //     return a + b
+        // }
+
+        // new 创建(了解即可)
+        // let sum = new Function("a","b","return a + b");
+
+        // 箭头函数:对函数的一种简写,比python中的lambda强大(不是所有函数都能改造为箭头函数)
+        // 没有参数也需要加括号，只有有且只有一个参数不需要加括号
+        // 函数体只有一句话不需要大括号
+        // 箭头函数没有作用范围的概念
+        // 箭头函数的this指向不会发生改变(call，bind和apply无法修改),永远取决于父元素所在上下文的this指向，父元素上下文this指向改变才会改变箭头函数的this指向
+        // 箭头函数不能作为构造函数使用(let new(3,5)会报错)
+        // let sum = (a,b) => a+b;
+
+        // 函数闭包(可以使在浏览器上无法访问里面的变量和函数等，在一定程度上减少代码被修改的风险，但是也有一定弊端)
+        (function(){
+            let a = 3;
+
+            function sum(a,b){
+                return a + b;
+            }
+            console.log(sum(10,20));
+        })()
+
+    </script>
+</body>
+</html>

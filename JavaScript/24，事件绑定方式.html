@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p ondblclick="test(1,this)">点我</p>
+
+
+        <p id="test2" ><a>点我2</a></p>
+
+
+        <p id="test3"><a>点我3</a></p>
+    </div>
+
+
+
+    <script>
+        /** 
+         * 事件绑定方式
+         * 
+         * 1，在html标签上使用on+事件名进行绑定
+         * 
+         *      a>在事件对应的回调函数中，this代表绑定事件的源对象
+         *      b>event代表事件对象(使用window.event获取)
+         * 
+         * 2，使用dom对象调用添加on<eventname>来添加事件(本质上等同于第一个)
+         *      a>可以直接传入事件对象event
+         *      b>函数不能额外传递其他参数
+         *      c>降低了网页与js的耦合度，html和js的分离
+         * 
+         * 3，使用dom对象的addEventListener(eventName,callbackfn,bool)添加事件(推荐)
+         *      a>有对应的调用方式dispatchEvent
+         *      b>eventName:事件对象       
+         *      c>callbackFn:触发事件的回调函数  
+         *      d>bool:默认是false，代表采用事件冒泡，如果设置为true，采用事件捕获机制
+         *  
+         *
+         * 
+         * 
+        */
+
+
+        function test(a, tag){
+            console.log(a, tag);
+            // 获取事件对象
+            console.log(window.event);
+        }
+
+
+        document.querySelector("#test2").ondblclick = function(event){
+            console.log(this);
+            console.log(window.event); // 不太推荐
+            console.log(event);
+        }
+
+        document.querySelector("#test3").addEventListener("dblclick",function(event){
+            console.log(this);
+            console.log(event);
+        })
+
+    </script>
+</body>
+</html>

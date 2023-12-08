@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise：ES6新增特性，解决异步编程问题，例如回调地狱问题
+
+        // Promise 是js中提供的一个类：构造函数必须传入一个回调函数
+        // 回调函数中定义要执行的任务，任务成功通过resolve确定，任务失败通过reject确定
+        // 传入的函数有两个参数:第一个参数代表解决，类型是一个函数，习惯用resolve，第二个参数也是一个函数，习惯用reject，
+        /** 
+         * Promise对象状态：
+         * 1,pengding:挂载中
+         * 2,fulfilled:已解决状态
+         * 3,rejected:已拒绝状态
+         * 
+         * 
+         * 调用resolve函数，状态从 pending -> fulfilled
+         * 调用reject函数，状态从 pending -> rejected
+         * 
+         * Promise状态一旦改变不可更改
+         * 
+         * Promise对象有两个非常重要的方法用来处理任务的结果
+         * 
+         *      - then()：当promise对象的状态为fulfilled时候才会执行的代码 ，状态改变时和
+         *          then有两个参数：第一个回调：任务成功的回调函数，第二个回调：任务拒绝的回调函数
+         *      then通常之传入第一个回调来处理任务成功的回调
+         * 
+         *      - catch()：当promise对象的状态为rejected时执行的代码，
+         *      catch用来处理任务失败的回调
+         * 
+         *      then和catch中定义的回调在本轮事件结束后才会触发执行
+         *      then和catch返回值均为promise对象
+         *      catch往往出现在链式调用的所有then的最后来捕获上面所有可能出现的错误
+         * 
+         * then和catch回调函数的返回值
+         * 1,返回平台数据或没有返回数据，回调函数返回的promise状态为fulfilled(成功)
+         * 2,抛出异常，回调函数返回的promise状态为rejected(失败)
+         * 3,返回一个promise对象，回调函数返回函数返回的promise对象
+         * 
+         * 
+         * 
+         * finally(fn):无论任务成功还是失败都会执行的代码(写道最后)
+         * 
+         * 
+         * Promise.resolve(x):快速构建一个fulfilled状态的promise对象
+         * Promise.reject(x):快速构建一个rejected状态的promise对象
+         * 
+         * Promise.all(promiseX, promiseY,...)：允许传入多个promise当所有pormise对象均返回fulfilled状态时all方法返回fulfilled状态的promise，如果有任何一个promise返回rejected状态的promise，all方法返回rejected状态
+         * all方法返回的promise调用then/catch的时候，回调函数的参数是一个列表，列表中国存放所有的promise返回的结果
+         * 
+         * Promise.race(promiseX, promiseY,...)：
+         * 哪一个promise最早切换状态，则race就返回它
+         * 
+         * 
+         */ 
+        new Promise(function(resolve, reject){
+            // resolve(ok)
+            // reject("error")
+            Math.random() > 0.3 ? resolve("下雪了") : reject("没有下雪");
+        }).then(data => {
+            console.log("任务成功"+data);
+            // throw new Error("模拟异常")
+
+            return new Promise((resolve, reject) => {
+                return Math.random() > 0.5 ? resolve("成功") : reject("失败")
+            })
+        }).then(str => {
+            console.log(str);
+        }).catch(error => {
+            console.log("任务失败"+error);
+        }).finally(function(){
+            console.log("======================");
+        })
+
+        
+    </script>
+</body>
+</html>

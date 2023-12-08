@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/commonfind.js"></script>
+</head>
+
+<body>
+    <script>
+        /** 
+         * localStorage：本地存储
+         *      - 存储在该容器的数据不会自动删除，不会随着浏览器的关闭而销毁，除非自动删除或清空缓存
+         *  setItem(key, value)：存储一个键值对格式的数据，键和值均为字符串
+         *  getItem(key)：根据键获取值
+         *  removeItem(key)：根据键删除值
+         *  clear()：清空容器
+         * 
+         * sessionStorage：会话存储
+         *  
+         *  用法参考localStorage
+         *      - 存储在该容器的数据会随着浏览器的关闭而销毁
+         *  setItem(key, value)：存储一个键值对格式的数据，键和值均为字符串
+         *  getItem(key)：根据键获取值
+         *  removeItem(key)：根据键删除值
+         *  clear()：清空容器
+         * 
+         * cookie：cookie存储
+         * Cookie是浏览器中非常重要的一个技术(用来解决用户身份登陆问题)
+         *      http协议
+         *          http一次完整的通信包含请求和响应
+         *          是一个无状态的协议，无法维持客户端和服务器通信的状态
+         * Cookie是存储在浏览器上的一个键值对格式的字符串数据
+         *      Cookie中存储的数据会自动随请求提交到服务器上，cookie可以对存储的数据设置过期时间
+         * 
+         * 
+        */
+
+
+
+        // 向浏览器写入cookie
+        /** 
+         * cookie常见属性
+         *      name：Cookie名字
+         *      value：Cookie的值
+         *      domain：将Cookie写入到指定的域名下
+         *      path：Cookie的访问路径前缀
+         *      expires：过期时间，是一个时间点，默认是一个本地实际，需要减去八小时
+         *      max-age：最大存活时间，是一个时间间隔。单位是秒
+        */
+        document.cookie = "name=xxx";
+        document.cookie = "age=222";
+        document.cookie = "sex=男";
+
+        let date = new Date();
+        let num = date.getTime() + 5 * 1000 - 8 * 60 * 60 * 1000;
+        console.dir(new Date(num));
+
+        document.cookie = "name=xxx;path=/;max-age=" + 300;
+        document.cookie = "age=yyy"
+
+        let cookies = document.cookie;
+        console.log(cookies);
+
+        /** 
+         * JSON序列化和反序列化
+         * JSON.stringify(obj)：将一个js对象/数组转为 JSON格式的字符串
+         * JSON.parse(text)：将一个json格式字符串转为js中的对象/数组
+         *
+         * 
+        */
+        localStorage.setItem("name", "haha")
+        let val = localStorage.getItem("name");
+        // localStorage.removeItem("name")
+        console.log(val);
+
+        sessionStorage.setItem("name", "haha")
+        let val2 = sessionStorage.getItem("name");
+        // sessionStorage.removeItem("name")
+        console.log(val);
+
+
+        
+        Cookies.add("BAIDU","2131435353",{maxAge:160});
+
+    </script>
+</body>
+
+</html>

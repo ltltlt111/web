@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/form-validtion.js"></script>
+</head>
+
+<body>
+    <form action="">
+        <div>
+            <label for="">姓名</label>
+            <input name="username" prop="username" required type="text">
+        </div>
+        <div>
+            <label for="">密码</label>
+            <input name="password" prop="password" required type="password">
+        </div>
+        、
+        <div>
+            <input type="submit" value="登录">
+        </div>
+
+        <script>
+            let formTag = document.querySelector("form")
+            console.log(formTag);
+            formTag.rules = {
+                username: [
+                    {
+                        required: true,
+                        message: "用户名不能为空",
+                    },
+                    {
+                        pattern: /^[\u4e00-\u9fa5]{2,5}$/,
+                        message: "用户名格式不正确"
+                    },
+                ],
+                password: [
+                    {
+                        required: true,
+                        message: "密码不能为空",
+                    },
+                    {
+                        maxlength: 20,
+                        message: "密码最长长度为20！",
+                    },
+                    {
+                        minlength: 6,
+                        message: "密码最短长度为6！",
+                    }
+                ],
+            }
+            formTag.validate(function (data) {
+                let username = document.querySelector("[name=username]").value;
+                let password = document.querySelector("[name=password]").value;
+                let storePassword = localStorage.getItem(username)
+                console.log(storePassword);
+                if (storePassword != null) {
+                    if (storePassword == password) {
+                        alert("登陆成功！");
+                        window.location.href = "http://www.httpbin.org/get";
+                    } else {
+                        alert("密码错误！");
+                    }
+                } else {
+                    alert("用户名不存在！");
+                }
+            }
+            )
+        </script>
+    </form>
+</body>
+
+</html>

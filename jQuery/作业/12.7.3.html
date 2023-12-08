@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.js"></script>
+    <style>
+        ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+        }
+    
+        ul li {
+          cursor: pointer;
+          padding: 5px;
+        }
+    
+        ul ul {
+          display: none;
+          margin-left: 20px;
+        }
+      </style>
+</head>
+<body>
+    
+    <ul>
+        <li class="parent">用户管理
+          <ul>
+            <li>添加用户</li>
+            <li>删除用户</li>
+            <li>查询用户</li>
+            <li>分配权限</li>
+          </ul>
+        </li>
+        <li class="parent">角色管理
+          <ul>
+            <li>添加角色</li>
+            <li>删除角色</li>
+            <li>查询角色</li>
+            <li>分配权限</li>
+          </ul>
+        </li>
+        <li class="parent">系统管理
+          <ul>
+            <li>登录</li>
+            <li>退出</li>
+            <li>注册</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <script>
+        $(document).ready(function () {
+          // 初始状态：隐藏所有二级菜单
+          $('ul ul').hide();
+      
+          // 默认展开第一个一级菜单下的二级菜单
+          $('ul > .parent:first-child > ul').show();
+      
+          // 一级菜单点击事件处理
+          $('.parent').click(function () {
+            // 隐藏所有二级菜单
+            $('ul ul').hide();
+      
+            // 如果当前一级菜单下的二级菜单是隐藏的，则展开；否则隐藏
+            $(this).children('ul').toggle();
+          });
+        });
+      </script>
+</body>
+</html>
