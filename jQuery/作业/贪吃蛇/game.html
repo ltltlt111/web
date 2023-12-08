@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <!-- 使用jQuery贪吃蛇 -->
+
+    <div id="box">
+        <div id="snake"></div>
+        <div id="food"></div>
+    </div>
+
+    <script>
+        // 1.定义蛇的构造函数
+        function Snake() {
+            // 1.1 定义蛇的属性
+            this.width = 20;
+            this.height = 20;
+            this.direction = 'right';
+            this.body = [
+                {x: 3, y: 1, color: 'red'},
+                {x: 2, y: 1, color: 'blue'},
+                {x: 1, y: 1, color: 'blue'}
+            ];
+        }
+
+        // 1.2 定义蛇的方法
+        Snake.prototype.render = function() {
+            // 1.2.1 渲染蛇的身体
+            for (var i = 0; i < this.body.length; i++) {
+                var div = document.createElement('div');
+                div.style.position = 'absolute';
+                div.style.left = this.body[i].x * this.width + 'px';
+                div.style.top = this.body[i].y * this.height + 'px';
+                div.style.width = this.width + 'px';
+                div.style.height = this.height + 'px';
+                div.style.backgroundColor = this.body[i].color;
+                document.getElementById('box').appendChild(div);
+            }
+        }
+
+        // 1.3 定义蛇移动的方法
+        Snake.prototype.move = function() {
+            // 1.3.1 让蛇的身体移动
+            for (var i = this.body.length - 1; i > 0; i--) {
+                this.body[i].x = this.body[i - 1].x;
+                this.body[i].y = this.body[i - 1].y;
+            }
+
+            // 1.3.2 让蛇的头部移动
+            switch(this.direction) {
+                case 'right':
+                    this.body[0].x += 1;
+                    break;
+                case 'left':
+                    this.body[0].x -= 1;
+                    break;
+                case 'top':
+                    this.body[0].y -= 1;
+                    break;
+                case 'bottom':
+                    this.body[0].y += 1;
+                    break;
+            }
+        }
+
+        // 1.4 定义蛇吃食物的方法
+        Snake.prototype.eat = function() {
+            // 1.4.1 判断蛇的头部是否和食物重合
+            var headX = this.body[0].x * this.width;
+            var headY = this.body[0].y * this.height;
+            var foodX = food.x;
+            var foodY = food.y;
+            if (headX == foodX && headY == foodY) {
+                // 1.4.2 让蛇的身体增加一节
+                var last = this.body[this.body.length - 1];
+                this.body.push({
+                    x: last.x,
+                    y: last.y,
+                    color: last.color
+                });
+
+                // 1.4.3 随机生成一个新的食物
+                food.render();
+            }
+        }
+
+        // 1.5 定义蛇死亡的方法
+        Snake.prototype.die = function() {
+            // 1.5.1 判断蛇是否碰到了墙壁
+            var headX = this.body[0].x * this.width;
+            var headY = this.body[0].y * this.height;
+            if (headX < 0 || headX >= 800 || headY < 0 || headY >= 600) {
+                return true;
+            }
+
+            // 1.5.2 判断蛇是否碰到了自己
+            for (var i = 1; i < this.body.length; i++) {
+                if (headX == this.body[i].x * this.width && headY == this.body[i].y * this.height) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // 2.定义食物的构造函数
+        function Food() {
+            // 2.1 定义食物的属性
+            this.width = 20;
+            this.height = 20;
+            this.x = 0;
+            this.y = 0;
+        }
+
+        // 2.2 定义食物的方法
+
+        // 2.2.1 定义食物随机生成的方法
+
+        Food.prototype.random = function() {
+            this.x = parseInt(Math.random() * 40);
+            this.y = parseInt(Math.random() * 30);
+        }
+
+        // 2.2.2 定义食物渲染的方法
+        Food.prototype.render = function() {
+            //
+            var div = document.getElementById('food');
+            div.style.position = 'absolute';
+            div.style.left = this.x * this.width + 'px';
+            div.style.top = this.y * this.height + 'px';
+            div.style.width = this.width + 'px';
+            div.style.height = this.height + 'px';
+            div.style.backgroundColor = 'green';
+        }
+
+        // 3.定义游戏的构造函数
+        function Game() {
+            // 3.1 定义游戏的属性
+            this.snake = new Snake();
+            this.food = new Food();
+            this.timer = null;
+        }
+
+        // 3.2 定义游戏开始的方法
+
+        Game.prototype.start = function() {
+            // 3.2.1 让蛇和食物渲染
+            this.snake.render();
+            this.food.random();
+            this.food.render();
+
+            // 3.2.2 让蛇移动
+            this.timer = setInterval(function() {
+                //
+                this.snake.move();
+                this.snake.eat();
+                this.snake.render();
+
+                // 3.2.3 判断蛇是否死亡
+                if (this.snake.die()) {
+                    alert('Game Over!');
+                    clearInterval(this.timer);
+                }
+            }.bind(this), 200);
+
+            // 3.2.4 让蛇根据键盘按键改变方向
+            document.onkeydown = function(e) {
+                switch(e.keyCode) {
+                    case 37:
+                        if (this.snake.direction != 'right') {
+                            this.snake.direction = 'left';
+                        }
+                        break;
+                    case 38:
+                        if (this.snake.direction != 'bottom') {
+                            this.snake.direction = 'top';
+                        }
+                        break;
+                    case 39:
+                        if (this.snake.direction != 'left') {
+                            this.snake.direction = 'right';
+                        }
+                        break;
+                    case 40:
+                        if (this.snake.direction != 'top') {
+                            this.snake.direction = 'bottom';
+                        }
+                        break;
+                }
+            }.bind(this);
+
+        }
+
+        // 4.创建游戏对象
+        var g = new Game();
+        g.start();
+    </script>
+
+</body>
+</html>
